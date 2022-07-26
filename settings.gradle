@@ -1,0 +1,4 @@
+rootProject.name = 'kook-spring-boot-starter'
+include 'core'
+include 'test'
+

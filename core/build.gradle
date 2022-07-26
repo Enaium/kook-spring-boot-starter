@@ -1,0 +1,108 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'maven-publish'
+    id 'signing'
+    id 'java'
+    id 'java-library'
+}
+
+group 'cn.enaium'
+version '0.1.0'
+archivesBaseName = 'kook-spring-boot-starter'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.named("bootJar") {
+    enabled = false
+}
+
+tasks.named("jar") {
+    archiveClassifier = ''
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
+}
+
+publishing {
+    repositories {
+        maven {
+            url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId archivesBaseName
+            version project.version
+
+            from components.java
+
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+
+            pom {
+                name = 'kook-spring-boot-starter'
+                description = 'KOOK机器人的spring-boot-starter'
+                url = 'https://github.com/Enaium/kook-spring-boot-starter/'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'enaium'
+                        name = 'Enaium'
+                        email = 'Enaium@outlook.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:https://github.com/Enaium/kook-spring-boot-starter.git'
+                    developerConnection = 'scm:git:https://github.com/Enaium/kook-spring-boot-starter.git'
+                    url = 'https://github.com/Enaium/kook-spring-boot-starter/'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
