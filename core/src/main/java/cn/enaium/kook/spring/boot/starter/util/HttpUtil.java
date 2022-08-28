@@ -53,7 +53,6 @@ public class HttpUtil {
         API.Method method = api.getMethod();
         String path = api.getPath();
         Map<Object, Object> body = api.getBody();
-        HttpRequest.Builder builder = HttpRequest.newBuilder().version(HttpClient.Version.HTTP_1_1).uri(URI.create(PREFIX + path)).timeout(Duration.ofMillis(5000));
 
         if (method.equals(API.Method.GET)) {
             //当Method为Get时,需要将参数拼接在url上
@@ -66,6 +65,8 @@ public class HttpUtil {
                 path += sb.substring(1);
             }
         }
+
+        HttpRequest.Builder builder = HttpRequest.newBuilder().version(HttpClient.Version.HTTP_1_1).uri(URI.create(PREFIX + path)).timeout(Duration.ofMillis(5000));
 
         if (body != null) {
             builder.header("Content-Type", "application/json");
