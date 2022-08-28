@@ -5,6 +5,8 @@
 
 支持了所有的HttpAPI和Websocket事件,可以在`test`里查看例子
 
+最新版本以maven仓库中版本为准
+
 ```xml
 <dependency>
   <groupId>cn.enaium</groupId>
@@ -14,5 +16,5 @@
 ```
 
 ```groovy
-implementation 'cn.enaium:kook-spring-boot-starter:0.1.0'
+implementation 'cn.enaium:kook-spring-boot-starter:0.1.1'
 ```
