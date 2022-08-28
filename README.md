@@ -9,12 +9,14 @@
 
 ```xml
 <dependency>
-  <groupId>cn.enaium</groupId>
-  <artifactId>kook-spring-boot-starter</artifactId>
-  <version>0.1.0</version>
+    <groupId>cn.enaium</groupId>
+    <artifactId>kook-spring-boot-starter</artifactId>
+    <version>0.1.0</version>
 </dependency>
 ```
 
 ```groovy
 implementation 'cn.enaium:kook-spring-boot-starter:0.1.1'
 ```
+
+提交pr时请提交到`develop`而不是`master`
