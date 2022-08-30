@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Listener
 public class GuildOnlineMember extends SystemMessageExtra<Map<Object, Object>> {
-    public static final String TYPE = "updated_guild_member";
+    public static final String TYPE = "guild_member_online";
 
     /**
      * 用户id
