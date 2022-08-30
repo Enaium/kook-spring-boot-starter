@@ -53,6 +53,19 @@ public class HttpUtil {
         API.Method method = api.getMethod();
         String path = api.getPath();
         Map<Object, Object> body = api.getBody();
+
+        if (method.equals(API.Method.GET)) {
+            //当Method为Get时,需要将参数拼接在url上
+            if (null != body && !body.isEmpty()) {
+                path += "?";
+                StringBuilder sb = new StringBuilder();
+                body.forEach((k, v) -> {
+                    sb.append("&").append(k.toString()).append("=").append(v.toString());
+                });
+                path += sb.substring(1);
+            }
+        }
+
         HttpRequest.Builder builder = HttpRequest.newBuilder().version(HttpClient.Version.HTTP_1_1).uri(URI.create(PREFIX + path)).timeout(Duration.ofMillis(5000));
 
         if (body != null) {
