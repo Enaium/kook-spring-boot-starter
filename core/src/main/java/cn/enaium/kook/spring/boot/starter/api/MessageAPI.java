@@ -34,7 +34,7 @@ public interface MessageAPI {
     /**
      * 发送频道聊天消息
      */
-    API MESSAGE_CREATE = new API(API.Method.GET, "message/create");
+    API MESSAGE_CREATE = new API(API.Method.POST, "message/create");
     /**
      * 更新频道聊天消息
      */
@@ -46,7 +46,7 @@ public interface MessageAPI {
     /**
      * 获取频道消息某回应的用户列表
      */
-    API MESSAGE_REACTION_LIST = new API(API.Method.POST, "message/reaction-list");
+    API MESSAGE_REACTION_LIST = new API(API.Method.GET, "message/reaction-list");
     /**
      * 给某个消息添加回应
      */
