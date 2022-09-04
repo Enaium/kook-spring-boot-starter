@@ -11,12 +11,12 @@
 <dependency>
     <groupId>cn.enaium</groupId>
     <artifactId>kook-spring-boot-starter</artifactId>
-    <version>0.1.3</version>
+    <version>最新版本</version>
 </dependency>
 ```
 
 ```groovy
-implementation 'cn.enaium:kook-spring-boot-starter:0.1.3'
+implementation 'cn.enaium:kook-spring-boot-starter:最新版本'
 ```
 
 提交pr时请提交到`develop`而不是`master`

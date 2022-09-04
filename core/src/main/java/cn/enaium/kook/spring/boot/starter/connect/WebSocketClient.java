@@ -104,6 +104,10 @@ public class WebSocketClient {
                         TextMessageExtra extra = JsonUtil.mapper().readValue(json, new TypeReference<Sign<EventData<TextMessageExtra>>>() {
                         }).d.extra;
                         String type = String.valueOf(extra.type);
+                        //TODO 此功能目前治标不治本, 但是可以解决问题
+                        if ("0".equals(type)) {
+                            type = String.valueOf(eventDataSign.d.type);
+                        }
                         Class<?> event = eventManager.listener.get(type);
                         eventManager.publish(JsonUtil.readData(JsonUtil.writeValueAsString(sign.d), event), event);
                     }

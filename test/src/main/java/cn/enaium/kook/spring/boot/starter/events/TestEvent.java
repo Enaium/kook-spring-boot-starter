@@ -22,6 +22,7 @@ import cn.enaium.kook.spring.boot.starter.api.DirectMessageAPI;
 import cn.enaium.kook.spring.boot.starter.api.MessageAPI;
 import cn.enaium.kook.spring.boot.starter.api.UserChatAPI;
 import cn.enaium.kook.spring.boot.starter.model.sign.data.EventData;
+import cn.enaium.kook.spring.boot.starter.model.sign.data.extra.event.message.ImageAnimationMessage;
 import cn.enaium.kook.spring.boot.starter.model.sign.data.extra.event.message.KMarkdownMessage;
 import cn.enaium.kook.spring.boot.starter.util.HttpUtil;
 import org.apache.logging.log4j.LogManager;
@@ -70,5 +71,10 @@ public class TestEvent {
                     )
             )));
         }
+    }
+
+    @Event(ImageAnimationMessage.class)
+    public void imageAnimation(EventData<ImageAnimationMessage> imageAnimationMessageEventData) {
+        logger.info(imageAnimationMessageEventData.extra.kmarkdown);
     }
 }
