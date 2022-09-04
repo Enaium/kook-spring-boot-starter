@@ -15,8 +15,5 @@ import java.util.Map;
 public class ImageAnimationMessage extends TextMessageExtra {
     public static final String TYPE = "12";
 
-    /**
-     * 动作内容
-     */
-    public Map<Object,Object> item_part;
+    public Map<Object, Object> kmarkdown;
 }
