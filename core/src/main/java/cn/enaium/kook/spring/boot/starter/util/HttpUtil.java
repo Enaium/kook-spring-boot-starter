@@ -19,20 +19,12 @@ package cn.enaium.kook.spring.boot.starter.util;
 import cn.enaium.kook.spring.boot.starter.api.API;
 import cn.enaium.kook.spring.boot.starter.configuration.KookConfiguration;
 import cn.enaium.kook.spring.boot.starter.model.result.Result;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import kong.unirest.HttpRequestWithBody;
+import kong.unirest.Unirest;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.Map;
 
 /**
@@ -49,7 +41,13 @@ public class HttpUtil {
         this.kookConfiguration = kookConfiguration;
     }
 
-    public String send(API api) {
+    /**
+     * 创建请求
+     *
+     * @param api api
+     * @return 请求体
+     */
+    public HttpRequestWithBody request(API api) {
         API.Method method = api.getMethod();
         String path = api.getPath();
         Map<Object, Object> body = api.getBody();
@@ -65,23 +63,27 @@ public class HttpUtil {
                 path += sb.substring(1);
             }
         }
-
-        HttpRequest.Builder builder = HttpRequest.newBuilder().version(HttpClient.Version.HTTP_1_1).uri(URI.create(PREFIX + path)).timeout(Duration.ofMillis(5000));
-
-        if (body != null) {
-            builder.header("Content-Type", "application/json");
-        }
-
-        builder.header("Authorization", "Bot " + kookConfiguration.getToken());
-
-        try {
-            HttpRequest request = builder.method(method.name(), body == null ? HttpRequest.BodyPublishers.noBody() : HttpRequest.BodyPublishers.ofString(JsonUtil.mapper().writeValueAsString(body))).build();
-            return HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString()).body();
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        return Unirest.request(method.name(), PREFIX + path).header("Authorization", "Bot " + kookConfiguration.getToken());
     }
 
+    /**
+     * 发送请求
+     *
+     * @param api api
+     * @return 返回的字符串
+     */
+    public String send(API api) {
+        return request(api).header("Content-Type", "application/json").asString().getBody();
+    }
+
+    /**
+     * 发送请求
+     *
+     * @param api   api
+     * @param klass 返回类型
+     * @param <T>   返回类型
+     * @return 根据类型将返回值序列化
+     */
     public <T> Result<T> send(API api, Class<T> klass) {
         try {
             return JsonUtil.mapper().readValue(send(api), TypeFactory.defaultInstance().constructParametricType(Result.class, klass));

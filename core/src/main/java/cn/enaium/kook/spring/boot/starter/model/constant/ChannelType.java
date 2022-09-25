@@ -14,33 +14,16 @@
  * limitations under the License.
  */
 
-package cn.enaium.kook.spring.boot.starter.event;
-
-import java.lang.reflect.Method;
+package cn.enaium.kook.spring.boot.starter.model.constant;
 
 /**
+ * 消息通道类型, GROUP 为组播消息, PERSON 为单播消息, BROADCAST 为广播消息
+ *
  * @author Enaium
+ * @since 0.2.0
  */
-public class Target {
-    private final Object instance;
-    private final Method method;
-    private final int priority;
-
-    public Target(Object instance, Method method, int priority) {
-        this.instance = instance;
-        this.method = method;
-        this.priority = priority;
-    }
-
-    public Object getInstance() {
-        return instance;
-    }
-
-    public Method getMethod() {
-        return method;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
+public interface ChannelType {
+    String GROUP = "GROUP";
+    String PERSON = "PERSON";
+    String BROADCAST = "BROADCAST";
 }

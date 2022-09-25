@@ -30,7 +30,7 @@ public class AttachmentsObject {
     /**
      * 多媒体地址
      */
-    public int url;
+    public String url;
     /**
      * 多媒体名
      */

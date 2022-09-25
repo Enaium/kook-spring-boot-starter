@@ -14,33 +14,21 @@
  * limitations under the License.
  */
 
-package cn.enaium.kook.spring.boot.starter.event;
-
-import java.lang.reflect.Method;
+package cn.enaium.kook.spring.boot.starter.model.constant;
 
 /**
+ * 1:文字消息, 2:图片消息，3:视频消息，4:文件消息， 8:音频消息，9:KMarkdown，10:card 消息，12:动作消息 255:系统消息, 其它的暂未开放
+ *
  * @author Enaium
+ * @since 0.2.0
  */
-public class Target {
-    private final Object instance;
-    private final Method method;
-    private final int priority;
-
-    public Target(Object instance, Method method, int priority) {
-        this.instance = instance;
-        this.method = method;
-        this.priority = priority;
-    }
-
-    public Object getInstance() {
-        return instance;
-    }
-
-    public Method getMethod() {
-        return method;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
+public interface MessageType {
+    int TEXT = 1;
+    int IMAGE = 2;
+    int VIDEO = 3;
+    int FILE = 4;
+    int AUDIO = 8;
+    int KMARKDOWN = 9;
+    int CARD = 10;
+    int SYSTEM = 255;
 }
