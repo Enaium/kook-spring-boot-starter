@@ -18,11 +18,14 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    api 'com.konghq:unirest-java:3.13.11'
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 java {
     withSourcesJar()
