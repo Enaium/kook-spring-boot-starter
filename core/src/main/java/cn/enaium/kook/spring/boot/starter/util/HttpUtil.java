@@ -19,12 +19,7 @@ package cn.enaium.kook.spring.boot.starter.util;
 import cn.enaium.kook.spring.boot.starter.api.API;
 import cn.enaium.kook.spring.boot.starter.configuration.KookConfiguration;
 import cn.enaium.kook.spring.boot.starter.model.result.Result;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
