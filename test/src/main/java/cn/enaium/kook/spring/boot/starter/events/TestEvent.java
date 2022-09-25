@@ -21,6 +21,8 @@ import cn.enaium.kook.spring.boot.starter.annotation.event.Register;
 import cn.enaium.kook.spring.boot.starter.api.DirectMessageAPI;
 import cn.enaium.kook.spring.boot.starter.api.MessageAPI;
 import cn.enaium.kook.spring.boot.starter.api.UserChatAPI;
+import cn.enaium.kook.spring.boot.starter.model.constant.ChannelType;
+import cn.enaium.kook.spring.boot.starter.model.constant.MessageType;
 import cn.enaium.kook.spring.boot.starter.model.sign.data.EventData;
 import cn.enaium.kook.spring.boot.starter.model.sign.data.extra.event.message.ImageAnimationMessage;
 import cn.enaium.kook.spring.boot.starter.model.sign.data.extra.event.message.KMarkdownMessage;
@@ -54,20 +56,22 @@ public class TestEvent {
         Map<Object, Object> kmarkdown = kMarkdownMessageEventData.extra.kmarkdown;
         Object raw_content = kmarkdown.get("raw_content");
         logger.info("对方说了:{}", raw_content);
-        if (kMarkdownMessageEventData.channel_type.equals("PERSON")) {
+        if (kMarkdownMessageEventData.channel_type.equals(ChannelType.PERSON)) {
+            //私信
             logger.info("说了Hello 返回:{}", httpUtil.send(DirectMessageAPI.DIRECT_MESSAGE_CREATE.setBody(
                     Map.of(
-                            "type", 9,
+                            "type", MessageType.KMARKDOWN,
                             "target_id", kMarkdownMessageEventData.author_id,
-                            "content", "Hello"
+                            "content", "**Hello**"
                     )
             )));
-        } else if (kMarkdownMessageEventData.channel_type.equals("GROUP")) {
+        } else if (kMarkdownMessageEventData.channel_type.equals(ChannelType.GROUP)) {
+            //频道
             logger.info("说了Hello 返回:{}", httpUtil.send(MessageAPI.MESSAGE_CREATE.setBody(
                     Map.of(
-                            "type", 9,
+                            "type", MessageType.KMARKDOWN,
                             "target_id", kMarkdownMessageEventData.target_id,
-                            "content", "Hello"
+                            "content", "**Hello**"
                     )
             )));
         }
