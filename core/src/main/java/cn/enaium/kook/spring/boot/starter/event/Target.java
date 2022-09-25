@@ -21,5 +21,26 @@ import java.lang.reflect.Method;
 /**
  * @author Enaium
  */
-public record Target(Object object, Method method, int priority) {
+public class Target {
+    private final Object instance;
+    private final Method method;
+    private final int priority;
+
+    public Target(Object instance, Method method, int priority) {
+        this.instance = instance;
+        this.method = method;
+        this.priority = priority;
+    }
+
+    public Object getInstance() {
+        return instance;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
 }

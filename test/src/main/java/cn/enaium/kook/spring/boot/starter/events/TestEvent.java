@@ -20,7 +20,6 @@ import cn.enaium.kook.spring.boot.starter.annotation.event.Event;
 import cn.enaium.kook.spring.boot.starter.annotation.event.Register;
 import cn.enaium.kook.spring.boot.starter.api.DirectMessageAPI;
 import cn.enaium.kook.spring.boot.starter.api.MessageAPI;
-import cn.enaium.kook.spring.boot.starter.api.UserChatAPI;
 import cn.enaium.kook.spring.boot.starter.model.constant.ChannelType;
 import cn.enaium.kook.spring.boot.starter.model.constant.MessageType;
 import cn.enaium.kook.spring.boot.starter.model.sign.data.EventData;

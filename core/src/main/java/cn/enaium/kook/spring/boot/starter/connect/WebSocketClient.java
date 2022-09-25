@@ -42,6 +42,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -80,7 +81,7 @@ public class WebSocketClient {
         String url = httpUtil.send(GatewayAPI.GATEWAY_INDEX, GatewayResult.class).data.url;
 
 
-        var webSocketClient = new StandardWebSocketClient();
+        StandardWebSocketClient webSocketClient = new StandardWebSocketClient();
         connectionManager = new WebSocketConnectionManager(webSocketClient, new BinaryWebSocketHandler() {
             @Override
             public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -90,10 +91,10 @@ public class WebSocketClient {
 
             @Override
             public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
-                var json = new String(decompress(message.getPayload().array()), StandardCharsets.UTF_8);
-                var sign = JsonUtil.readValue(json, Sign.class);
+                String json = new String(decompress(message.getPayload().array()), StandardCharsets.UTF_8);
+                Sign<?> sign = JsonUtil.readValue(json, Sign.class);
                 if (sign.s == 0) {
-                    var eventDataSign = JsonUtil.readSign(json, EventData.class);
+                    Sign<EventData> eventDataSign = JsonUtil.readSign(json, EventData.class);
                     if (eventDataSign.d.type == 255) {
                         SystemMessageExtra<?> extra = JsonUtil.mapper().readValue(json, new TypeReference<Sign<EventData<SystemMessageExtra<?>>>>() {
                         }).d.extra;
@@ -112,12 +113,18 @@ public class WebSocketClient {
                         eventManager.publish(JsonUtil.readData(JsonUtil.writeValueAsString(sign.d), event), event);
                     }
                 } else if (sign.s == 5) {//服务端通知客户端, 代表该连接已失效, 请重新连接。客户端收到后应该主动断开当前连接。
-                    var reconnectDataSign = JsonUtil.readSign(json, ReconnectData.class);
+                    Sign<ReconnectData> reconnectDataSign = JsonUtil.readSign(json, ReconnectData.class);
                     logger.info("err:{}", reconnectDataSign.d.err);
                     switch (reconnectDataSign.d.code) {
-                        case 40106 -> logger.info("resume 失败, 缺少参数");
-                        case 40107 -> logger.info("当前 session 已过期 (resume 失败, PING 的 sn 无效)");
-                        case 40108 -> logger.info("无效的 sn , 或 sn 已经不存在 (resume 失败, PING 的 sn 无效)");
+                        case 40106:
+                            logger.info("resume 失败, 缺少参数");
+                            break;
+                        case 40107:
+                            logger.info("当前 session 已过期 (resume 失败, PING 的 sn 无效)");
+                            break;
+                        case 40108:
+                            logger.info("无效的 sn , 或 sn 已经不存在 (resume 失败, PING 的 sn 无效)");
+                            break;
                     }
                     connectionManager.stop();
                 }
@@ -140,7 +147,10 @@ public class WebSocketClient {
 
             public void ping(WebSocketSession session) {
                 try {
-                    session.sendMessage(new PingMessage(ByteBuffer.wrap(JsonUtil.writeValueAsString(Map.of("s", 2, "sn", sn)).getBytes(StandardCharsets.UTF_8))));
+                    session.sendMessage(new PingMessage(ByteBuffer.wrap(JsonUtil.writeValueAsString(new HashMap<String, Integer>() {{
+                        put("s", 2);
+                        put("sn", sn);
+                    }}).getBytes(StandardCharsets.UTF_8))));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -163,11 +173,11 @@ public class WebSocketClient {
     private byte[] decompress(byte[] data) {
         byte[] output;
 
-        var decompresses = new Inflater();
+        Inflater decompresses = new Inflater();
         decompresses.reset();
         decompresses.setInput(data);
 
-        var o = new ByteArrayOutputStream(data.length);
+        ByteArrayOutputStream o = new ByteArrayOutputStream(data.length);
         try {
             byte[] buf = new byte[1024];
             while (!decompresses.finished()) {

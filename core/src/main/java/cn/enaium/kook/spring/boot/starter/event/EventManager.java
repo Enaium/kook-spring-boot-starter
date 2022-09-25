@@ -79,7 +79,7 @@ public class EventManager {
                 }
             }
         }
-        event.values().forEach(it -> it.sort((Comparator.comparingInt(Target::priority))));
+        event.values().forEach(it -> it.sort((Comparator.comparingInt(Target::getPriority))));
     }
 
     /**
@@ -96,7 +96,7 @@ public class EventManager {
 
         targets.forEach(event -> {
             try {
-                event.method().invoke(event.object(), o);
+                event.getMethod().invoke(event.getInstance(), o);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
