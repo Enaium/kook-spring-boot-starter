@@ -73,7 +73,11 @@ public class HttpUtil {
      * @return 返回的字符串
      */
     public String send(API api) {
-        return request(api).header("Content-Type", "application/json").asString().getBody();
+        HttpRequestWithBody request = request(api);
+        if (api.getBody() != null) {
+            return request.body(api.getBody()).header("Content-Type", "application/json").asString().getBody();
+        }
+        return request.asString().getBody();
     }
 
     /**
