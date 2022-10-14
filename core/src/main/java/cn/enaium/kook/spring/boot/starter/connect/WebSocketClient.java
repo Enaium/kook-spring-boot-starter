@@ -137,7 +137,7 @@ public class WebSocketClient {
             public void handlePongMessage(WebSocketSession session, PongMessage message) throws Exception {
 
                 sn = JsonUtil.readValue(new String(message.getPayload().array(), StandardCharsets.UTF_8), Sign.class).sn;
-                TimeUtil.time(TimeUnit.SECONDS, 30 + new Random().nextInt(-5, 5), () -> ping(session));
+                TimeUtil.time(TimeUnit.SECONDS, 25 + new Random().nextInt(5), () -> ping(session));
                 TimeUtil.time(TimeUnit.SECONDS, 1, () -> {
                     if (pong.delay(10000L)) {
                         logger.error("10秒内没收到Pong,连接超时");
