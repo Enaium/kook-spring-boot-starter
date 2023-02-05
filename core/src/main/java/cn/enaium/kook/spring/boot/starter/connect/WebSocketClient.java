@@ -91,40 +91,34 @@ public class WebSocketClient {
 
             @Override
             public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
-                String json = new String(decompress(message.getPayload().array()), StandardCharsets.UTF_8);
-                Sign<?> sign = JsonUtil.readValue(json, Sign.class);
+                var json = new String(decompress(message.getPayload().array()), StandardCharsets.UTF_8);
+                var sign = JsonUtil.readValue(json, Sign.class);
                 if (sign.s == 0) {
-                    Sign<EventData> eventDataSign = JsonUtil.readSign(json, EventData.class);
+                    var eventDataSign = JsonUtil.readSign(json, EventData.class);
                     if (eventDataSign.d.type == 255) {
-                        SystemMessageExtra<?> extra = JsonUtil.mapper().readValue(json, new TypeReference<Sign<EventData<SystemMessageExtra<?>>>>() {
+                        var extra = JsonUtil.mapper().readValue(json, new TypeReference<Sign<EventData<SystemMessageExtra<?>>>>() {
                         }).d.extra;
-                        String type = extra.type;
+                        var type = extra.type;
                         Class<?> event = eventManager.listener.get(type);
                         eventManager.publish(JsonUtil.readData(JsonUtil.writeValueAsString(sign.d), event), event);
                     } else {
                         TextMessageExtra extra = JsonUtil.mapper().readValue(json, new TypeReference<Sign<EventData<TextMessageExtra>>>() {
                         }).d.extra;
-                        String type = String.valueOf(extra.type);
+                        var type = String.valueOf(extra.type);
                         //TODO 此功能目前治标不治本, 但是可以解决问题
                         if ("0".equals(type)) {
                             type = String.valueOf(eventDataSign.d.type);
                         }
-                        Class<?> event = eventManager.listener.get(type);
+                        var event = eventManager.listener.get(type);
                         eventManager.publish(JsonUtil.readData(JsonUtil.writeValueAsString(sign.d), event), event);
                     }
                 } else if (sign.s == 5) {//服务端通知客户端, 代表该连接已失效, 请重新连接。客户端收到后应该主动断开当前连接。
                     Sign<ReconnectData> reconnectDataSign = JsonUtil.readSign(json, ReconnectData.class);
                     logger.info("err:{}", reconnectDataSign.d.err);
                     switch (reconnectDataSign.d.code) {
-                        case 40106:
-                            logger.info("resume 失败, 缺少参数");
-                            break;
-                        case 40107:
-                            logger.info("当前 session 已过期 (resume 失败, PING 的 sn 无效)");
-                            break;
-                        case 40108:
-                            logger.info("无效的 sn , 或 sn 已经不存在 (resume 失败, PING 的 sn 无效)");
-                            break;
+                        case 40106 -> logger.info("resume 失败, 缺少参数");
+                        case 40107 -> logger.info("当前 session 已过期 (resume 失败, PING 的 sn 无效)");
+                        case 40108 -> logger.info("无效的 sn , 或 sn 已经不存在 (resume 失败, PING 的 sn 无效)");
                     }
                     connectionManager.stop();
                 }

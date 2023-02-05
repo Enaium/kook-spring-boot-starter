@@ -20,11 +20,14 @@ import cn.enaium.kook.spring.boot.starter.api.API;
 import cn.enaium.kook.spring.boot.starter.configuration.KookConfiguration;
 import cn.enaium.kook.spring.boot.starter.model.result.Result;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import kong.unirest.HttpRequestWithBody;
-import kong.unirest.Unirest;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.Map;
 
 /**
@@ -41,53 +44,37 @@ public class HttpUtil {
         this.kookConfiguration = kookConfiguration;
     }
 
-    /**
-     * 创建请求
-     *
-     * @param api api
-     * @return 请求体
-     */
-    public HttpRequestWithBody request(API api) {
-        API.Method method = api.getMethod();
-        String path = api.getPath();
-        Map<Object, Object> body = api.getBody();
+    public String send(API api) {
+        var method = api.getMethod();
+        var path = api.getPath();
+        var body = api.getBody();
 
         if (method.equals(API.Method.GET)) {
             //当Method为Get时,需要将参数拼接在url上
             if (null != body && !body.isEmpty()) {
                 path += "?";
                 StringBuilder sb = new StringBuilder();
-                body.forEach((k, v) -> {
-                    sb.append("&").append(k.toString()).append("=").append(v.toString());
-                });
+                body.forEach((k, v) -> sb.append("&").append(k.toString()).append("=").append(v.toString()));
                 path += sb.substring(1);
             }
         }
-        return Unirest.request(method.name(), PREFIX + path).header("Authorization", "Bot " + kookConfiguration.getToken());
-    }
 
-    /**
-     * 发送请求
-     *
-     * @param api api
-     * @return 返回的字符串
-     */
-    public String send(API api) {
-        HttpRequestWithBody request = request(api);
-        if (api.getBody() != null) {
-            return request.body(api.getBody()).header("Content-Type", "application/json").asString().getBody();
+        var builder = HttpRequest.newBuilder().version(HttpClient.Version.HTTP_1_1).uri(URI.create(PREFIX + path)).timeout(Duration.ofMillis(5000));
+
+        if (body != null) {
+            builder.header("Content-Type", "application/json");
         }
-        return request.asString().getBody();
+
+        builder.header("Authorization", "Bot " + kookConfiguration.getToken());
+
+        try {
+            var request = builder.method(method.name(), body == null ? HttpRequest.BodyPublishers.noBody() : HttpRequest.BodyPublishers.ofString(JsonUtil.mapper().writeValueAsString(body))).build();
+            return HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString()).body();
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    /**
-     * 发送请求
-     *
-     * @param api   api
-     * @param klass 返回类型
-     * @param <T>   返回类型
-     * @return 根据类型将返回值序列化
-     */
     public <T> Result<T> send(API api, Class<T> klass) {
         try {
             return JsonUtil.mapper().readValue(send(api), TypeFactory.defaultInstance().constructParametricType(Result.class, klass));
