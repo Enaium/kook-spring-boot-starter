@@ -1,5 +1,0 @@
-.gradle
-.idea
-**/build
-test/src/main/resources/application.properties
-test/src/test/resources/application.properties
