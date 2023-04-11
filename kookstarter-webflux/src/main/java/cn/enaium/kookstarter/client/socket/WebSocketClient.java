@@ -17,6 +17,7 @@
 package cn.enaium.kookstarter.client.socket;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.socket.client.ReactorNettyWebSocketClient;
 
 /**
  * @author Enaium
@@ -24,4 +25,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class WebSocketClient {
+    public void web() {
+        final var reactorNettyWebSocketClient = new ReactorNettyWebSocketClient();
+
+    }
 }
