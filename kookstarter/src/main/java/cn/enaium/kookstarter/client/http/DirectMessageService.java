@@ -33,7 +33,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @GetExchange("direct-message/list")
-    Mono<Map<String, Object>> getDirectMessageList(Object... params);
+    Mono<String> getDirectMessageList(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/create")
-    Mono<Map<String, Object>> postDirectMessageCreate(Object... params);
+    Mono<String> postDirectMessageCreate(Object... params);
 
 
     /**
@@ -51,7 +51,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/update")
-    Mono<Map<String, Object>> postDirectMessageUpdate(Object... params);
+    Mono<String> postDirectMessageUpdate(Object... params);
 
 
     /**
@@ -60,7 +60,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/delete")
-    Mono<Map<String, Object>> postDirectMessageDelete(Object... params);
+    Mono<String> postDirectMessageDelete(Object... params);
 
 
     /**
@@ -69,7 +69,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @GetExchange("direct-message/reaction-list")
-    Mono<Map<String, Object>> getDirectMessageReactionList(Object... params);
+    Mono<String> getDirectMessageReactionList(Object... params);
 
 
     /**
@@ -78,7 +78,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/add-reaction")
-    Mono<Map<String, Object>> postDirectMessageAddReaction(Object... params);
+    Mono<String> postDirectMessageAddReaction(Object... params);
 
 
     /**
@@ -87,5 +87,5 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/delete-reaction")
-    Mono<Map<String, Object>> postDirectMessageDeleteReaction(Object... params);
+    Mono<String> postDirectMessageDeleteReaction(Object... params);
 }

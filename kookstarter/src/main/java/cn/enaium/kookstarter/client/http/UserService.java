@@ -33,7 +33,7 @@ public interface UserService {
      * @since 0.3.0
      */
     @GetExchange("user/me")
-    Mono<Map<String, Object>> getUserMe(Object... params);
+    Mono<String> getUserMe(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface UserService {
      * @since 0.3.0
      */
     @GetExchange("user/view")
-    Mono<Map<String, Object>> getUserView(Object... params);
+    Mono<String> getUserView(Object... params);
 
 
     /**
@@ -51,5 +51,5 @@ public interface UserService {
      * @since 0.3.0
      */
     @PostExchange("user/offline")
-    Mono<Map<String, Object>> postUserOffline(Object... params);
+    Mono<String> postUserOffline(Object... params);
 }

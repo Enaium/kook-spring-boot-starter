@@ -17,12 +17,16 @@
 package cn.enaium.kookstarter.configuration;
 
 import cn.enaium.kookstarter.client.http.*;
+import cn.enaium.kookstarter.client.resolver.GetResolver;
+import cn.enaium.kookstarter.client.resolver.PostResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+import reactor.core.publisher.Mono;
 
 /**
  * @author Enaium
@@ -39,12 +43,17 @@ public class WebClientConfiguration {
 
     @Bean
     WebClient webClient() {
-        return WebClient.builder().baseUrl("https://www.kookapp.cn/api/v3/").defaultHeader(HttpHeaders.AUTHORIZATION, "Bot " + configuration.getToken()).build();
+        return WebClient.builder().baseUrl("https://www.kookapp.cn/api/v3/")
+                .defaultStatusHandler(HttpStatusCode::isError, clientResponse -> Mono.empty())
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bot " + configuration.getToken()).build();
     }
 
     @Bean
     HttpServiceProxyFactory httpServiceProxyFactory(WebClient webClient) {
-        return HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient)).build();
+        return HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient))
+                .customArgumentResolver(new GetResolver())
+                .customArgumentResolver(new PostResolver())
+                .build();
     }
 
     /**

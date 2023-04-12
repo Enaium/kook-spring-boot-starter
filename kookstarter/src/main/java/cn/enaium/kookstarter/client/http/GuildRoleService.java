@@ -33,7 +33,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @GetExchange("guild-role/list")
-    Mono<Map<String, Object>> getGuildRoleList(Object... params);
+    Mono<String> getGuildRoleList(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/create")
-    Mono<Map<String, Object>> postGuildRoleCreate(Object... params);
+    Mono<String> postGuildRoleCreate(Object... params);
 
 
     /**
@@ -51,7 +51,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/update")
-    Mono<Map<String, Object>> postGuildRoleUpdate(Object... params);
+    Mono<String> postGuildRoleUpdate(Object... params);
 
 
     /**
@@ -60,7 +60,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/delete")
-    Mono<Map<String, Object>> postGuildRoleDelete(Object... params);
+    Mono<String> postGuildRoleDelete(Object... params);
 
 
     /**
@@ -69,7 +69,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/grant")
-    Mono<Map<String, Object>> postGuildRoleGrant(Object... params);
+    Mono<String> postGuildRoleGrant(Object... params);
 
 
     /**
@@ -78,5 +78,5 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/revoke")
-    Mono<Map<String, Object>> postGuildRoleRevoke(Object... params);
+    Mono<String> postGuildRoleRevoke(Object... params);
 }

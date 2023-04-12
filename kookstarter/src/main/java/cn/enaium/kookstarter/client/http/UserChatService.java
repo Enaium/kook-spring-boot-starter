@@ -33,7 +33,7 @@ public interface UserChatService {
      * @since 0.3.0
      */
     @GetExchange("user-chat/list")
-    Mono<Map<String, Object>> getUserChatList(Object... params);
+    Mono<String> getUserChatList(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface UserChatService {
      * @since 0.3.0
      */
     @GetExchange("user-chat/view")
-    Mono<Map<String, Object>> getUserChatView(Object... params);
+    Mono<String> getUserChatView(Object... params);
 
 
     /**
@@ -51,7 +51,7 @@ public interface UserChatService {
      * @since 0.3.0
      */
     @PostExchange("user-chat/create")
-    Mono<Map<String, Object>> postUserChatCreate(Object... params);
+    Mono<String> postUserChatCreate(Object... params);
 
 
     /**
@@ -60,5 +60,5 @@ public interface UserChatService {
      * @since 0.3.0
      */
     @PostExchange("user-chat/delete")
-    Mono<Map<String, Object>> postUserChatDelete(Object... params);
+    Mono<String> postUserChatDelete(Object... params);
 }

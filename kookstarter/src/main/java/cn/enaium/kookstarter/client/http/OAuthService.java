@@ -32,5 +32,5 @@ interface OAuthService {
      * @since 0.3.0
      */
     @PostExchange("oauth2/token")
-    Mono<Map<String, Object>> postApiOauth2Token(Object... params);
+    Mono<String> postApiOauth2Token(Object... params);
 }

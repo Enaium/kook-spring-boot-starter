@@ -16,6 +16,7 @@
 
 package cn.enaium.kookstarter.client.http;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
@@ -32,5 +33,5 @@ public interface AssetService {
      * @since 0.3.0
      */
     @PostExchange("asset/create")
-    Mono<Map<String, Object>> postAssetCreate(Object... params);
+    Mono<String> postAssetCreate(MultipartFile file);
 }

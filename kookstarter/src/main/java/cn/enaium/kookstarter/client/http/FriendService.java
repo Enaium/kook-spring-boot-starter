@@ -33,7 +33,7 @@ public interface FriendService {
      * @since 0.3.0
      */
     @GetExchange("friend")
-    Mono<Map<String, Object>> getFriend(Object... params);
+    Mono<String> getFriend(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface FriendService {
      * @since 0.3.0
      */
     @PostExchange("friend/request")
-    Mono<Map<String, Object>> postFriendRequest(Object... params);
+    Mono<String> postFriendRequest(Object... params);
 
 
     /**
@@ -51,7 +51,7 @@ public interface FriendService {
      * @since 0.3.0
      */
     @PostExchange("friend/handle-request")
-    Mono<Map<String, Object>> postFriendHandleRequest(Object... params);
+    Mono<String> postFriendHandleRequest(Object... params);
 
 
     /**
@@ -60,5 +60,5 @@ public interface FriendService {
      * @since 0.3.0
      */
     @PostExchange("friend/delete")
-    Mono<Map<String, Object>> postFriendDelete(Object... params);
+    Mono<String> postFriendDelete(Object... params);
 }

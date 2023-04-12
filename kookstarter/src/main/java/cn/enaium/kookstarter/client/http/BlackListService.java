@@ -33,7 +33,7 @@ public interface BlackListService {
      * @since 0.3.0
      */
     @GetExchange("blacklist/list")
-    Mono<Map<String, Object>> getBlacklistList(Object... params);
+    Mono<String> getBlacklistList(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface BlackListService {
      * @since 0.3.0
      */
     @PostExchange("blacklist/create")
-    Mono<Map<String, Object>> postBlacklistCreate(Object... params);
+    Mono<String> postBlacklistCreate(Object... params);
 
 
     /**
@@ -51,5 +51,5 @@ public interface BlackListService {
      * @since 0.3.0
      */
     @PostExchange("blacklist/delete")
-    Mono<Map<String, Object>> postBlacklistDelete(Object... params);
+    Mono<String> postBlacklistDelete(Object... params);
 }

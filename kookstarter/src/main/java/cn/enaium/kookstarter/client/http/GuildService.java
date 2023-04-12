@@ -33,7 +33,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @GetExchange("guild/list")
-    Mono<Map<String, Object>> getGuildList(Object... params);
+    Mono<String> getGuildList(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @GetExchange("guild/view")
-    Mono<Map<String, Object>> getGuildView(Object... params);
+    Mono<String> getGuildView(Object... params);
 
 
     /**
@@ -51,7 +51,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @GetExchange("guild/user-list")
-    Mono<Map<String, Object>> getGuildUserList(Object... params);
+    Mono<String> getGuildUserList(Object... params);
 
 
     /**
@@ -60,7 +60,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @PostExchange("guild/nickname")
-    Mono<Map<String, Object>> postGuildNickname(Object... params);
+    Mono<String> postGuildNickname(Object... params);
 
 
     /**
@@ -69,7 +69,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @PostExchange("guild/leave")
-    Mono<Map<String, Object>> postGuildLeave(Object... params);
+    Mono<String> postGuildLeave(Object... params);
 
 
     /**
@@ -78,7 +78,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @PostExchange("guild/kickout")
-    Mono<Map<String, Object>> postGuildKickout(Object... params);
+    Mono<String> postGuildKickout(Object... params);
 
 
     /**
@@ -87,7 +87,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @GetExchange("guild-mute/list")
-    Mono<Map<String, Object>> getGuildMuteList(Object... params);
+    Mono<String> getGuildMuteList(Object... params);
 
 
     /**
@@ -96,7 +96,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @PostExchange("guild-mute/create")
-    Mono<Map<String, Object>> postGuildMuteCreate(Object... params);
+    Mono<String> postGuildMuteCreate(Object... params);
 
 
     /**
@@ -105,7 +105,7 @@ public interface GuildService {
      * @since 0.3.0
      */
     @PostExchange("guild-mute/delete")
-    Mono<Map<String, Object>> postGuildMuteDelete(Object... params);
+    Mono<String> postGuildMuteDelete(Object... params);
 
 
     /**
@@ -114,5 +114,5 @@ public interface GuildService {
      * @since 0.3.0
      */
     @GetExchange("guild-boost/history")
-    Mono<Map<String, Object>> getGuildBoostHistory(Object... params);
+    Mono<String> getGuildBoostHistory(Object... params);
 }

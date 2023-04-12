@@ -33,7 +33,7 @@ public interface InviteService {
      * @since 0.3.0
      */
     @GetExchange("invite/list")
-    Mono<Map<String, Object>> getInviteList(Object... params);
+    Mono<String> getInviteList(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface InviteService {
      * @since 0.3.0
      */
     @PostExchange("invite/create")
-    Mono<Map<String, Object>> postInviteCreate(Object... params);
+    Mono<String> postInviteCreate(Object... params);
 
 
     /**
@@ -51,5 +51,5 @@ public interface InviteService {
      * @since 0.3.0
      */
     @PostExchange("invite/delete")
-    Mono<Map<String, Object>> postInviteDelete(Object... params);
+    Mono<String> postInviteDelete(Object... params);
 }

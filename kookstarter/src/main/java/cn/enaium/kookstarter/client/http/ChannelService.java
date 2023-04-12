@@ -33,7 +33,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/list")
-    Mono<Map<String, Object>> getChannelList(Object... params);
+    Mono<String> getChannelList(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/view")
-    Mono<Map<String, Object>> getChannelView(Object... params);
+    Mono<String> getChannelView(Object... params);
 
 
     /**
@@ -51,7 +51,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel/create")
-    Mono<Map<String, Object>> postChannelCreate(Object... params);
+    Mono<String> postChannelCreate(Object... params);
 
 
     /**
@@ -60,7 +60,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel/update")
-    Mono<Map<String, Object>> postChannelUpdate(Object... params);
+    Mono<String> postChannelUpdate(Object... params);
 
 
     /**
@@ -69,7 +69,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel/delete")
-    Mono<Map<String, Object>> postChannelDelete(Object... params);
+    Mono<String> postChannelDelete(Object... params);
 
 
     /**
@@ -78,7 +78,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/user-list")
-    Mono<Map<String, Object>> getChannelUserList(Object... params);
+    Mono<String> getChannelUserList(Object... params);
 
 
     /**
@@ -87,7 +87,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/move-user")
-    Mono<Map<String, Object>> postChannelMoveUser(Object... params);
+    Mono<String> postChannelMoveUser(Object... params);
 
 
     /**
@@ -96,7 +96,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel-role/index")
-    Mono<Map<String, Object>> getChannelRoleIndex(Object... params);
+    Mono<String> getChannelRoleIndex(Object... params);
 
 
     /**
@@ -105,7 +105,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/create")
-    Mono<Map<String, Object>> postChannelRoleCreate(Object... params);
+    Mono<String> postChannelRoleCreate(Object... params);
 
 
     /**
@@ -114,7 +114,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/update")
-    Mono<Map<String, Object>> postChannelRoleUpdate(Object... params);
+    Mono<String> postChannelRoleUpdate(Object... params);
 
 
     /**
@@ -123,7 +123,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/sync")
-    Mono<Map<String, Object>> postChannelRoleSync(Object... params);
+    Mono<String> postChannelRoleSync(Object... params);
 
 
     /**
@@ -132,5 +132,5 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/delete")
-    Mono<Map<String, Object>> postChannelRoleDelete(Object... params);
+    Mono<String> postChannelRoleDelete(Object... params);
 }

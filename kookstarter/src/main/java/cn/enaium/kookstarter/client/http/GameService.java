@@ -33,7 +33,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @GetExchange("game")
-    Mono<Map<String, Object>> getGame(Object... params);
+    Mono<String> getGame(Object... params);
 
 
     /**
@@ -42,7 +42,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/create")
-    Mono<Map<String, Object>> postGameCreate(Object... params);
+    Mono<String> postGameCreate(Object... params);
 
 
     /**
@@ -51,7 +51,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/update")
-    Mono<Map<String, Object>> postGameUpdate(Object... params);
+    Mono<String> postGameUpdate(Object... params);
 
 
     /**
@@ -60,7 +60,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/delete")
-    Mono<Map<String, Object>> postGameDelete(Object... params);
+    Mono<String> postGameDelete(Object... params);
 
 
     /**
@@ -69,7 +69,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/activity")
-    Mono<Map<String, Object>> postGameActivity(Object... params);
+    Mono<String> postGameActivity(Object... params);
 
 
     /**
@@ -78,6 +78,6 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/delete-activity")
-    Mono<Map<String, Object>> postGameDeleteActivity(Object... params);
+    Mono<String> postGameDeleteActivity(Object... params);
 
 }
