@@ -14,6 +14,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux:$spring")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$spring")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$spring")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 java {
@@ -63,8 +69,9 @@ publishing {
     }
     repositories {
         maven {
-            url = uri("https://s01.oss.sonatype.org" +
-                    "/service/local/staging/deploy/maven2/")
+            url = uri(
+                "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            )
             credentials {
                 username = project.properties["ossrhUsername"].toString()
                 password = project.properties["ossrhPassword"].toString()
