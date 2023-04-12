@@ -19,6 +19,7 @@ package cn.enaium.kookstarter.client.http;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -60,7 +61,7 @@ public interface GuildService {
      *
      * @since 0.3.0
      */
-    @GetExchange("guild/nickname")
+    @PostExchange("guild/nickname")
     Mono<Map<String, Object>> postGuildNickname(@RequestBody Map<String, Object> params);
 
 
@@ -69,7 +70,7 @@ public interface GuildService {
      *
      * @since 0.3.0
      */
-    @GetExchange("guild/leave")
+    @PostExchange("guild/leave")
     Mono<Map<String, Object>> postGuildLeave(@RequestBody Map<String, Object> params);
 
 
@@ -78,7 +79,7 @@ public interface GuildService {
      *
      * @since 0.3.0
      */
-    @GetExchange("guild/kickout")
+    @PostExchange("guild/kickout")
     Mono<Map<String, Object>> postGuildKickout(@RequestBody Map<String, Object> params);
 
 
@@ -96,7 +97,7 @@ public interface GuildService {
      *
      * @since 0.3.0
      */
-    @GetExchange("guild-mute/create")
+    @PostExchange("guild-mute/create")
     Mono<Map<String, Object>> postGuildMuteCreate(@RequestBody Map<String, Object> params);
 
 
@@ -105,7 +106,7 @@ public interface GuildService {
      *
      * @since 0.3.0
      */
-    @GetExchange("guild-mute/delete")
+    @PostExchange("guild-mute/delete")
     Mono<Map<String, Object>> postGuildMuteDelete(@RequestBody Map<String, Object> params);
 
 

@@ -19,6 +19,7 @@ package cn.enaium.kookstarter.client.http;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -51,7 +52,7 @@ public interface UserChatService {
      *
      * @since 0.3.0
      */
-    @GetExchange("user-chat/create")
+    @PostExchange("user-chat/create")
     Mono<Map<String, Object>> postUserChatCreate(@RequestBody Map<String, Object> params);
 
 
@@ -60,6 +61,6 @@ public interface UserChatService {
      *
      * @since 0.3.0
      */
-    @GetExchange("user-chat/delete")
+    @PostExchange("user-chat/delete")
     Mono<Map<String, Object>> postUserChatDelete(@RequestBody Map<String, Object> params);
 }

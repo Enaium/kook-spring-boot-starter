@@ -19,6 +19,7 @@ package cn.enaium.kookstarter.client.http;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -42,7 +43,7 @@ public interface BlackListService {
      *
      * @since 0.3.0
      */
-    @GetExchange("blacklist/create")
+    @PostExchange("blacklist/create")
     Mono<Map<String, Object>> postBlacklistCreate(@RequestBody Map<String, Object> params);
 
 
@@ -51,6 +52,6 @@ public interface BlackListService {
      *
      * @since 0.3.0
      */
-    @GetExchange("blacklist/delete")
+    @PostExchange("blacklist/delete")
     Mono<Map<String, Object>> postBlacklistDelete(@RequestBody Map<String, Object> params);
 }

@@ -16,8 +16,7 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import cn.enaium.kookstarter.client.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import reactor.core.publisher.Mono;
 

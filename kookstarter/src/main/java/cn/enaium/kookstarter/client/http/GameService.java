@@ -19,6 +19,7 @@ package cn.enaium.kookstarter.client.http;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -42,7 +43,7 @@ public interface GameService {
      *
      * @since 0.3.0
      */
-    @GetExchange("game/create")
+    @PostExchange("game/create")
     Mono<Map<String, Object>> postGameCreate(@RequestBody Map<String, Object> params);
 
 
@@ -51,7 +52,7 @@ public interface GameService {
      *
      * @since 0.3.0
      */
-    @GetExchange("game/update")
+    @PostExchange("game/update")
     Mono<Map<String, Object>> postGameUpdate(@RequestBody Map<String, Object> params);
 
 
@@ -60,7 +61,7 @@ public interface GameService {
      *
      * @since 0.3.0
      */
-    @GetExchange("game/delete")
+    @PostExchange("game/delete")
     Mono<Map<String, Object>> postGameDelete(@RequestBody Map<String, Object> params);
 
 
@@ -69,7 +70,7 @@ public interface GameService {
      *
      * @since 0.3.0
      */
-    @GetExchange("game/activity")
+    @PostExchange("game/activity")
     Mono<Map<String, Object>> postGameActivity(@RequestBody Map<String, Object> params);
 
 
@@ -78,7 +79,7 @@ public interface GameService {
      *
      * @since 0.3.0
      */
-    @GetExchange("game/delete-activity")
+    @PostExchange("game/delete-activity")
     Mono<Map<String, Object>> postGameDeleteActivity(@RequestBody Map<String, Object> params);
 
 }

@@ -19,6 +19,7 @@ package cn.enaium.kookstarter.client.http;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -51,7 +52,7 @@ public interface ChannelService {
      *
      * @since 0.3.0
      */
-    @GetExchange("channel/create")
+    @PostExchange("channel/create")
     Mono<Map<String, Object>> postChannelCreate(@RequestBody Map<String, Object> params);
 
 
@@ -60,7 +61,7 @@ public interface ChannelService {
      *
      * @since 0.3.0
      */
-    @GetExchange("channel/update")
+    @PostExchange("channel/update")
     Mono<Map<String, Object>> postChannelUpdate(@RequestBody Map<String, Object> params);
 
 
@@ -69,7 +70,7 @@ public interface ChannelService {
      *
      * @since 0.3.0
      */
-    @GetExchange("channel/delete")
+    @PostExchange("channel/delete")
     Mono<Map<String, Object>> postChannelDelete(@RequestBody Map<String, Object> params);
 
 
@@ -105,7 +106,7 @@ public interface ChannelService {
      *
      * @since 0.3.0
      */
-    @GetExchange("channel-role/create")
+    @PostExchange("channel-role/create")
     Mono<Map<String, Object>> postChannelRoleCreate(@RequestBody Map<String, Object> params);
 
 
@@ -114,7 +115,7 @@ public interface ChannelService {
      *
      * @since 0.3.0
      */
-    @GetExchange("channel-role/update")
+    @PostExchange("channel-role/update")
     Mono<Map<String, Object>> postChannelRoleUpdate(@RequestBody Map<String, Object> params);
 
 
@@ -123,7 +124,7 @@ public interface ChannelService {
      *
      * @since 0.3.0
      */
-    @GetExchange("channel-role/sync")
+    @PostExchange("channel-role/sync")
     Mono<Map<String, Object>> postChannelRoleSync(@RequestBody Map<String, Object> params);
 
 
@@ -132,6 +133,6 @@ public interface ChannelService {
      *
      * @since 0.3.0
      */
-    @GetExchange("channel-role/delete")
+    @PostExchange("channel-role/delete")
     Mono<Map<String, Object>> postChannelRoleDelete(@RequestBody Map<String, Object> params);
 }

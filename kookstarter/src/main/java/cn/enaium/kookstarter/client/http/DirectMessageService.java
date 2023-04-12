@@ -19,6 +19,7 @@ package cn.enaium.kookstarter.client.http;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -42,7 +43,7 @@ public interface DirectMessageService {
      *
      * @since 0.3.0
      */
-    @GetExchange("direct-message/create")
+    @PostExchange("direct-message/create")
     Mono<Map<String, Object>> postDirectMessageCreate(@RequestBody Map<String, Object> params);
 
 
@@ -51,7 +52,7 @@ public interface DirectMessageService {
      *
      * @since 0.3.0
      */
-    @GetExchange("direct-message/update")
+    @PostExchange("direct-message/update")
     Mono<Map<String, Object>> postDirectMessageUpdate(@RequestBody Map<String, Object> params);
 
 
@@ -60,7 +61,7 @@ public interface DirectMessageService {
      *
      * @since 0.3.0
      */
-    @GetExchange("direct-message/delete")
+    @PostExchange("direct-message/delete")
     Mono<Map<String, Object>> postDirectMessageDelete(@RequestBody Map<String, Object> params);
 
 
@@ -78,7 +79,7 @@ public interface DirectMessageService {
      *
      * @since 0.3.0
      */
-    @GetExchange("direct-message/add-reaction")
+    @PostExchange("direct-message/add-reaction")
     Mono<Map<String, Object>> postDirectMessageAddReaction(@RequestBody Map<String, Object> params);
 
 
@@ -87,6 +88,6 @@ public interface DirectMessageService {
      *
      * @since 0.3.0
      */
-    @GetExchange("direct-message/delete-reaction")
+    @PostExchange("direct-message/delete-reaction")
     Mono<Map<String, Object>> postDirectMessageDeleteReaction(@RequestBody Map<String, Object> params);
 }
