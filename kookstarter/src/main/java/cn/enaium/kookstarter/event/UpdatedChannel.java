@@ -18,6 +18,7 @@ package cn.enaium.kookstarter.event;
 
 /**
  * @author Enaium
+ * @since 0.3.0
  */
 public class UpdatedChannel extends Event {
     public UpdatedChannel(Object source, Object metadata) {

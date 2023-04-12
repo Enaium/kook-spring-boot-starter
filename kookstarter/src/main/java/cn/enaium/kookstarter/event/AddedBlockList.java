@@ -18,6 +18,7 @@ package cn.enaium.kookstarter.event;
 
 /**
  * @author Enaium
+ * @since 0.3.0
  */
 public class AddedBlockList extends Event {
     public AddedBlockList(Object source, Object metadata) {

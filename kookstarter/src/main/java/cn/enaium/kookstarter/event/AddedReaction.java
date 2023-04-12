@@ -18,6 +18,7 @@ package cn.enaium.kookstarter.event;
 
 /**
  * @author Enaium
+ * @since 0.3.0
  */
 public class AddedReaction extends Event {
     public AddedReaction(Object source, Object metadata) {

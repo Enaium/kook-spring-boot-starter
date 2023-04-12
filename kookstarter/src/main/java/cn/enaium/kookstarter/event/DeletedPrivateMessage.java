@@ -18,6 +18,7 @@ package cn.enaium.kookstarter.event;
 
 /**
  * @author Enaium
+ * @since 0.3.0
  */
 public class DeletedPrivateMessage extends Event {
     public DeletedPrivateMessage(Object source, Object metadata) {
