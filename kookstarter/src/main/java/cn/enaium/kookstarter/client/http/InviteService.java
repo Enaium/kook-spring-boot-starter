@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface InviteService {
      * @since 0.3.0
      */
     @GetExchange("invite/list")
-    Mono<String> getInviteList(Object... params);
+    Mono<Map<String, Object>> getInviteList(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface InviteService {
      * @since 0.3.0
      */
     @PostExchange("invite/create")
-    Mono<String> postInviteCreate(Object... params);
+    Mono<Map<String, Object>> postInviteCreate(Object... params);
 
 
     /**
@@ -53,5 +51,5 @@ public interface InviteService {
      * @since 0.3.0
      */
     @PostExchange("invite/delete")
-    Mono<String> postInviteDelete(Object... params);
+    Mono<Map<String, Object>> postInviteDelete(Object... params);
 }

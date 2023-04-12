@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface FriendService {
      * @since 0.3.0
      */
     @GetExchange("friend")
-    Mono<String> getFriend(Object... params);
+    Mono<Map<String, Object>> getFriend(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface FriendService {
      * @since 0.3.0
      */
     @PostExchange("friend/request")
-    Mono<String> postFriendRequest(Object... params);
+    Mono<Map<String, Object>> postFriendRequest(Object... params);
 
 
     /**
@@ -53,7 +51,7 @@ public interface FriendService {
      * @since 0.3.0
      */
     @PostExchange("friend/handle-request")
-    Mono<String> postFriendHandleRequest(Object... params);
+    Mono<Map<String, Object>> postFriendHandleRequest(Object... params);
 
 
     /**
@@ -62,5 +60,5 @@ public interface FriendService {
      * @since 0.3.0
      */
     @PostExchange("friend/delete")
-    Mono<String> postFriendDelete(Object... params);
+    Mono<Map<String, Object>> postFriendDelete(Object... params);
 }

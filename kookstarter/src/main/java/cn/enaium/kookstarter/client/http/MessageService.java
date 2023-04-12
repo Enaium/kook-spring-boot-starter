@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @GetExchange("message/list")
-    Mono<String> getMessageList(Object... params);
+    Mono<Map<String, Object>> getMessageList(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @GetExchange("message/view")
-    Mono<String> getMessageView(Object... params);
+    Mono<Map<String, Object>> getMessageView(Object... params);
 
 
     /**
@@ -53,7 +51,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/create")
-    Mono<String> postMessageCreate(Object... params);
+    Mono<Map<String, Object>> postMessageCreate(Object... params);
 
 
     /**
@@ -62,7 +60,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/update")
-    Mono<String> postMessageUpdate(Object... params);
+    Mono<Map<String, Object>> postMessageUpdate(Object... params);
 
 
     /**
@@ -71,7 +69,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/delete")
-    Mono<String> postMessageDelete(Object... params);
+    Mono<Map<String, Object>> postMessageDelete(Object... params);
 
 
     /**
@@ -80,7 +78,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @GetExchange("message/reaction-list")
-    Mono<String> getMessageReactionList(Object... params);
+    Mono<Map<String, Object>> getMessageReactionList(Object... params);
 
 
     /**
@@ -89,7 +87,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/add-reaction")
-    Mono<String> postMessageAddReaction(Object... params);
+    Mono<Map<String, Object>> postMessageAddReaction(Object... params);
 
 
     /**
@@ -98,5 +96,5 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/delete-reaction")
-    Mono<String> postMessageDeleteReaction(Object... params);
+    Mono<Map<String, Object>> postMessageDeleteReaction(Object... params);
 }

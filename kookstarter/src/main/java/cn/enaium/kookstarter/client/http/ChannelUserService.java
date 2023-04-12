@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import reactor.core.publisher.Mono;
 
@@ -34,5 +32,5 @@ public interface ChannelUserService {
      * @since 0.3.0
      */
     @GetExchange("channel-user/get-joined-channel")
-    Mono<String> getChannelUserGetJoinedChannel(Object... params);
+    Mono<Map<String, Object>> getChannelUserGetJoinedChannel(Object... params);
 }

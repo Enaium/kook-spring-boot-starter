@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/list")
-    Mono<String> getChannelList(Object... params);
+    Mono<Map<String, Object>> getChannelList(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/view")
-    Mono<String> getChannelView(Object... params);
+    Mono<Map<String, Object>> getChannelView(Object... params);
 
 
     /**
@@ -53,7 +51,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel/create")
-    Mono<String> postChannelCreate(Object... params);
+    Mono<Map<String, Object>> postChannelCreate(Object... params);
 
 
     /**
@@ -62,7 +60,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel/update")
-    Mono<String> postChannelUpdate(Object... params);
+    Mono<Map<String, Object>> postChannelUpdate(Object... params);
 
 
     /**
@@ -71,7 +69,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel/delete")
-    Mono<String> postChannelDelete(Object... params);
+    Mono<Map<String, Object>> postChannelDelete(Object... params);
 
 
     /**
@@ -80,7 +78,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/user-list")
-    Mono<String> getChannelUserList(Object... params);
+    Mono<Map<String, Object>> getChannelUserList(Object... params);
 
 
     /**
@@ -89,7 +87,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel/move-user")
-    Mono<String> postChannelMoveUser(Object... params);
+    Mono<Map<String, Object>> postChannelMoveUser(Object... params);
 
 
     /**
@@ -98,7 +96,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @GetExchange("channel-role/index")
-    Mono<String> getChannelRoleIndex(Object... params);
+    Mono<Map<String, Object>> getChannelRoleIndex(Object... params);
 
 
     /**
@@ -107,7 +105,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/create")
-    Mono<String> postChannelRoleCreate(Object... params);
+    Mono<Map<String, Object>> postChannelRoleCreate(Object... params);
 
 
     /**
@@ -116,7 +114,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/update")
-    Mono<String> postChannelRoleUpdate(Object... params);
+    Mono<Map<String, Object>> postChannelRoleUpdate(Object... params);
 
 
     /**
@@ -125,7 +123,7 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/sync")
-    Mono<String> postChannelRoleSync(Object... params);
+    Mono<Map<String, Object>> postChannelRoleSync(Object... params);
 
 
     /**
@@ -134,5 +132,5 @@ public interface ChannelService {
      * @since 0.3.0
      */
     @PostExchange("channel-role/delete")
-    Mono<String> postChannelRoleDelete(Object... params);
+    Mono<Map<String, Object>> postChannelRoleDelete(Object... params);
 }

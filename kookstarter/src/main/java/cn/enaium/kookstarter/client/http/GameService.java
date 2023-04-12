@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @GetExchange("game")
-    Mono<String> getGame(Object... params);
+    Mono<Map<String, Object>> getGame(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/create")
-    Mono<String> postGameCreate(Object... params);
+    Mono<Map<String, Object>> postGameCreate(Object... params);
 
 
     /**
@@ -53,7 +51,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/update")
-    Mono<String> postGameUpdate(Object... params);
+    Mono<Map<String, Object>> postGameUpdate(Object... params);
 
 
     /**
@@ -62,7 +60,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/delete")
-    Mono<String> postGameDelete(Object... params);
+    Mono<Map<String, Object>> postGameDelete(Object... params);
 
 
     /**
@@ -71,7 +69,7 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/activity")
-    Mono<String> postGameActivity(Object... params);
+    Mono<Map<String, Object>> postGameActivity(Object... params);
 
 
     /**
@@ -80,6 +78,6 @@ public interface GameService {
      * @since 0.3.0
      */
     @PostExchange("game/delete-activity")
-    Mono<String> postGameDeleteActivity(Object... params);
+    Mono<Map<String, Object>> postGameDeleteActivity(Object... params);
 
 }

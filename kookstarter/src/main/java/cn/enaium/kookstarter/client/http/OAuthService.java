@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
@@ -34,5 +32,5 @@ interface OAuthService {
      * @since 0.3.0
      */
     @PostExchange("oauth2/token")
-    Mono<String> postApiOauth2Token(Object... params);
+    Mono<Map<String, Object>> postApiOauth2Token(Object... params);
 }

@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @GetExchange("guild-role/list")
-    Mono<String> getGuildRoleList(Object... params);
+    Mono<Map<String, Object>> getGuildRoleList(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/create")
-    Mono<String> postGuildRoleCreate(Object... params);
+    Mono<Map<String, Object>> postGuildRoleCreate(Object... params);
 
 
     /**
@@ -53,7 +51,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/update")
-    Mono<String> postGuildRoleUpdate(Object... params);
+    Mono<Map<String, Object>> postGuildRoleUpdate(Object... params);
 
 
     /**
@@ -62,7 +60,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/delete")
-    Mono<String> postGuildRoleDelete(Object... params);
+    Mono<Map<String, Object>> postGuildRoleDelete(Object... params);
 
 
     /**
@@ -71,7 +69,7 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/grant")
-    Mono<String> postGuildRoleGrant(Object... params);
+    Mono<Map<String, Object>> postGuildRoleGrant(Object... params);
 
 
     /**
@@ -80,5 +78,5 @@ public interface GuildRoleService {
      * @since 0.3.0
      */
     @PostExchange("guild-role/revoke")
-    Mono<String> postGuildRoleRevoke(Object... params);
+    Mono<Map<String, Object>> postGuildRoleRevoke(Object... params);
 }

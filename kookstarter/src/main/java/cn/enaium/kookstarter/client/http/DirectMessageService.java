@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @GetExchange("direct-message/list")
-    Mono<String> getDirectMessageList(Object... params);
+    Mono<Map<String, Object>> getDirectMessageList(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/create")
-    Mono<String> postDirectMessageCreate(Object... params);
+    Mono<Map<String, Object>> postDirectMessageCreate(Object... params);
 
 
     /**
@@ -53,7 +51,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/update")
-    Mono<String> postDirectMessageUpdate(Object... params);
+    Mono<Map<String, Object>> postDirectMessageUpdate(Object... params);
 
 
     /**
@@ -62,7 +60,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/delete")
-    Mono<String> postDirectMessageDelete(Object... params);
+    Mono<Map<String, Object>> postDirectMessageDelete(Object... params);
 
 
     /**
@@ -71,7 +69,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @GetExchange("direct-message/reaction-list")
-    Mono<String> getDirectMessageReactionList(Object... params);
+    Mono<Map<String, Object>> getDirectMessageReactionList(Object... params);
 
 
     /**
@@ -80,7 +78,7 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/add-reaction")
-    Mono<String> postDirectMessageAddReaction(Object... params);
+    Mono<Map<String, Object>> postDirectMessageAddReaction(Object... params);
 
 
     /**
@@ -89,5 +87,5 @@ public interface DirectMessageService {
      * @since 0.3.0
      */
     @PostExchange("direct-message/delete-reaction")
-    Mono<String> postDirectMessageDeleteReaction(Object... params);
+    Mono<Map<String, Object>> postDirectMessageDeleteReaction(Object... params);
 }

@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface UserService {
      * @since 0.3.0
      */
     @GetExchange("user/me")
-    Mono<String> getUserMe(Object... params);
+    Mono<Map<String, Object>> getUserMe(Object... params);
 
 
     /**
@@ -44,7 +42,7 @@ public interface UserService {
      * @since 0.3.0
      */
     @GetExchange("user/view")
-    Mono<String> getUserView(Object... params);
+    Mono<Map<String, Object>> getUserView(Object... params);
 
 
     /**
@@ -53,5 +51,5 @@ public interface UserService {
      * @since 0.3.0
      */
     @PostExchange("user/offline")
-    Mono<String> postUserOffline(Object... params);
+    Mono<Map<String, Object>> postUserOffline(Object... params);
 }

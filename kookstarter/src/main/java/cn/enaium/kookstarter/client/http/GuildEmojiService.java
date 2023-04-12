@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
@@ -35,7 +33,7 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @GetExchange("guild-emoji/list")
-    Mono<String> getGuildEmojiList(Object... params);
+    Mono<Map<String, Object>> getGuildEmojiList(Object... params);
 
     /**
      * 创建服务器表情
@@ -43,7 +41,7 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @PostExchange("guild-emoji/create")
-    Mono<String> postGuildEmojiCreate(Object... params);
+    Mono<Map<String, Object>> postGuildEmojiCreate(Object... params);
 
     /**
      * 更新服务器表情
@@ -51,7 +49,7 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @PostExchange("guild-emoji/update")
-    Mono<String> postGuildEmojiUpdate(Object... params);
+    Mono<Map<String, Object>> postGuildEmojiUpdate(Object... params);
 
 
     /**
@@ -60,5 +58,5 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @PostExchange("guild-emoji/delete")
-    Mono<String> postGuildEmojiDelete(Object... params);
+    Mono<Map<String, Object>> postGuildEmojiDelete(Object... params);
 }
