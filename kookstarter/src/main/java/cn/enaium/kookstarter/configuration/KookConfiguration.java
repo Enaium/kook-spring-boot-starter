@@ -17,25 +17,36 @@
 package cn.enaium.kookstarter.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * @author Enaium
  * @since 0.1.0
  */
-@Component
-@ConfigurationProperties(value = "kook")
+@ConfigurationProperties("kook")
 public class KookConfiguration {
     /**
      * 机器人的Token
      */
     private String token;
 
+    /**
+     * 收到信令时在控制台输出
+     */
+    private boolean showSign = false;
+
+    public String getToken() {
+        return token;
+    }
+
     public void setToken(String token) {
         this.token = token;
     }
 
-    public String getToken() {
-        return token;
+    public boolean isShowSign() {
+        return showSign;
+    }
+
+    public void setShowSign(boolean showSign) {
+        this.showSign = showSign;
     }
 }

@@ -61,13 +61,13 @@ public class Events {
                     entry("self_joined_guild", SelfJoinedGuild.class),
                     entry("self_exited_guild", SelfExitedGuild.class),
                     entry("message_btn_click", MessageBtnClick.class),
-                    entry("text_channel_message_1", TextEvent.class),
-                    entry("text_channel_message_2", ImageEvent.class),
-                    entry("text_channel_message_3", VideoEvent.class),
-                    entry("text_channel_message_4", FileEvent.class),
-                    entry("text_channel_message_8", AudioEvent.class),
-                    entry("text_channel_message_9", KMarkdownEvent.class),
-                    entry("text_channel_message_10", CardEvent.class),
-                    entry("text_channel_message_12", ImageAnimationEvent.class)
+                    entry("message_1", TextEvent.class),
+                    entry("message_2", ImageEvent.class),
+                    entry("message_3", VideoEvent.class),
+                    entry("message_4", FileEvent.class),
+                    entry("message_8", AudioEvent.class),
+                    entry("message_9", KMarkdownEvent.class),
+                    entry("message_10", CardEvent.class),
+                    entry("message_12", ImageAnimationEvent.class)
             );
 }
