@@ -81,5 +81,7 @@ publishing {
 }
 
 signing {
-    sign(publishing.publications["mavenJava"])
+    project.properties["signing.secretKeyRingFile"]?.let {
+        sign(publishing.publications["mavenJava"])
+    }
 }
