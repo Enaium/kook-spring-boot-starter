@@ -16,8 +16,6 @@
 
 package cn.enaium.kookstarter.event;
 
-import cn.enaium.kookstarter.event.Event;
-
 /**
  * @author Enaium
  * @since 0.3.0
