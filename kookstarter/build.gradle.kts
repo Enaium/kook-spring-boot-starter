@@ -11,7 +11,7 @@ java.targetCompatibility = JavaVersion.VERSION_17
 val spring = "3.0.5"
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-webflux:$spring")
+    compileOnly("org.springframework.boot:spring-boot-starter-webflux:$spring")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$spring")
 
