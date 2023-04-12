@@ -16,19 +16,6 @@
 
 package cn.enaium.kookstarter.event;
 
-import cn.enaium.kookstarter.event.channel.*;
-import cn.enaium.kookstarter.event.direct.message.DeletedPrivateMessage;
-import cn.enaium.kookstarter.event.direct.message.PrivateAddedReaction;
-import cn.enaium.kookstarter.event.direct.message.PrivateDeletedReaction;
-import cn.enaium.kookstarter.event.direct.message.UpdatedPrivateMessage;
-import cn.enaium.kookstarter.event.guild.*;
-import cn.enaium.kookstarter.event.guild.member.*;
-import cn.enaium.kookstarter.event.guild.role.AddedRole;
-import cn.enaium.kookstarter.event.guild.role.DeletedRole;
-import cn.enaium.kookstarter.event.guild.role.UpdatedRole;
-import cn.enaium.kookstarter.event.message.*;
-import cn.enaium.kookstarter.event.user.*;
-
 import java.util.Map;
 
 import static java.util.Map.entry;
