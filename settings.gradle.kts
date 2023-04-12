@@ -1,2 +1,2 @@
-rootProject.name = "root"
-include("kookstarter-webflux")
+rootProject.name = "kookstarter"
+include("kookstarter")
