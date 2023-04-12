@@ -34,5 +34,5 @@ public interface BadgeService {
      * @since 0.3.0
      */
     @GetExchange("badge/guild")
-    Mono<Map<String, Object>> getBadgeGuild(@RequestParam Map<String, Object> params);
+    Mono<String> getBadgeGuild(Object... params);
 }

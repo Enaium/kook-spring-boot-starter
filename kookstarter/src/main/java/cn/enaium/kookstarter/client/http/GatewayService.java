@@ -16,11 +16,8 @@
 
 package cn.enaium.kookstarter.client.http;
 
-import cn.enaium.kookstarter.client.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.Map;
 
 /**
  * @author Enaium
@@ -33,5 +30,5 @@ public interface GatewayService {
      * @since 0.3.0
      */
     @GetExchange("gateway/index")
-    Mono<Map<String, Object>> getGatewayIndex(@RequestParam Map<String, Object> params);
+    Mono<String> getGatewayIndex(Object... params);
 }

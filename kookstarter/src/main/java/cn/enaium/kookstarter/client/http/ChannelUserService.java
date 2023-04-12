@@ -34,5 +34,5 @@ public interface ChannelUserService {
      * @since 0.3.0
      */
     @GetExchange("channel-user/get-joined-channel")
-    Mono<Map<String, Object>> getChannelUserGetJoinedChannel(@RequestParam Map<String, Object> params);
+    Mono<String> getChannelUserGetJoinedChannel(Object... params);
 }

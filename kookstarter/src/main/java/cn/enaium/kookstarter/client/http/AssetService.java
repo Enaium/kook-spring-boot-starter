@@ -34,5 +34,5 @@ public interface AssetService {
      * @since 0.3.0
      */
     @PostExchange("asset/create")
-    Mono<Map<String, Object>> postAssetCreate(@RequestBody Map<String, Object> params);
+    Mono<String> postAssetCreate(Object... params);
 }

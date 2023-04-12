@@ -35,7 +35,7 @@ public interface IntimacyService {
      * @since 0.3.0
      */
     @GetExchange("intimacy/index")
-    Mono<Map<String, Object>> getIntimacyIndex(@RequestParam Map<String, Object> params);
+    Mono<String> getIntimacyIndex(Object... params);
 
 
     /**
@@ -44,5 +44,5 @@ public interface IntimacyService {
      * @since 0.3.0
      */
     @PostExchange("intimacy/update")
-    Mono<Map<String, Object>> postIntimacyUpdate(@RequestBody Map<String, Object> params);
+    Mono<String> postIntimacyUpdate(Object... params);
 }

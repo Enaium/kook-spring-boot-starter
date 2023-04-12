@@ -35,7 +35,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @GetExchange("message/list")
-    Mono<Map<String, Object>> getMessageList(@RequestParam Map<String, Object> params);
+    Mono<String> getMessageList(Object... params);
 
 
     /**
@@ -44,7 +44,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @GetExchange("message/view")
-    Mono<Map<String, Object>> getMessageView(@RequestParam Map<String, Object> params);
+    Mono<String> getMessageView(Object... params);
 
 
     /**
@@ -53,7 +53,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/create")
-    Mono<Map<String, Object>> postMessageCreate(@RequestBody Map<String, Object> params);
+    Mono<String> postMessageCreate(Object... params);
 
 
     /**
@@ -62,7 +62,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/update")
-    Mono<Map<String, Object>> postMessageUpdate(@RequestBody Map<String, Object> params);
+    Mono<String> postMessageUpdate(Object... params);
 
 
     /**
@@ -71,7 +71,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/delete")
-    Mono<Map<String, Object>> postMessageDelete(@RequestBody Map<String, Object> params);
+    Mono<String> postMessageDelete(Object... params);
 
 
     /**
@@ -80,7 +80,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @GetExchange("message/reaction-list")
-    Mono<Map<String, Object>> getMessageReactionList(@RequestParam Map<String, Object> params);
+    Mono<String> getMessageReactionList(Object... params);
 
 
     /**
@@ -89,7 +89,7 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/add-reaction")
-    Mono<Map<String, Object>> postMessageAddReaction(@RequestBody Map<String, Object> params);
+    Mono<String> postMessageAddReaction(Object... params);
 
 
     /**
@@ -98,5 +98,5 @@ public interface MessageService {
      * @since 0.3.0
      */
     @PostExchange("message/delete-reaction")
-    Mono<Map<String, Object>> postMessageDeleteReaction(@RequestBody Map<String, Object> params);
+    Mono<String> postMessageDeleteReaction(Object... params);
 }

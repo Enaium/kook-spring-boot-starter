@@ -35,7 +35,7 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @GetExchange("guild-emoji/list")
-    Mono<Map<String, Object>> getGuildEmojiList(@RequestParam Map<String, Object> params);
+    Mono<String> getGuildEmojiList(Object... params);
 
     /**
      * 创建服务器表情
@@ -43,7 +43,7 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @PostExchange("guild-emoji/create")
-    Mono<Map<String, Object>> postGuildEmojiCreate(@RequestBody Map<String, Object> params);
+    Mono<String> postGuildEmojiCreate(Object... params);
 
     /**
      * 更新服务器表情
@@ -51,7 +51,7 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @PostExchange("guild-emoji/update")
-    Mono<Map<String, Object>> postGuildEmojiUpdate(@RequestBody Map<String, Object> params);
+    Mono<String> postGuildEmojiUpdate(Object... params);
 
 
     /**
@@ -60,5 +60,5 @@ public interface GuildEmojiService {
      * @since 0.3.0
      */
     @PostExchange("guild-emoji/delete")
-    Mono<Map<String, Object>> postGuildEmojiDelete(@RequestBody Map<String, Object> params);
+    Mono<String> postGuildEmojiDelete(Object... params);
 }
