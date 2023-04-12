@@ -16,27 +16,37 @@
 
 package cn.enaium.kookstarter;
 
+import cn.enaium.kookstarter.client.socket.Client;
+import cn.enaium.kookstarter.configuration.KookConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Enaium
  * @since 0.1.0
  */
 @ComponentScan
-@Configuration
+@EnableConfigurationProperties(KookConfiguration.class)
 public class KookStarter {
 
-    private final Logger logger = LogManager.getLogger(KookStarter.class);
+    public static final Logger LOGGER = LogManager.getLogger(KookStarter.class);
+
+
+    private final Client client;
+
+    public KookStarter(Client client) {
+        this.client = client;
+    }
+
 
     @Bean
     public CommandLineRunner run() {
         return args -> {
-            logger.info("""
+            LOGGER.info("""
                     \n
                     _|    _|    _|_|      _|_|    _|    _|    _|_|_|  _|_|_|_|_|    _|_|    _|_|_|    _|_|_|_|_|  _|_|_|_|  _|_|_|   \s
                     _|  _|    _|    _|  _|    _|  _|  _|    _|            _|      _|    _|  _|    _|      _|      _|        _|    _| \s
@@ -44,6 +54,7 @@ public class KookStarter {
                     _|  _|    _|    _|  _|    _|  _|  _|          _|      _|      _|    _|  _|    _|      _|      _|        _|    _| \s
                     _|    _|    _|_|      _|_|    _|    _|  _|_|_|        _|      _|    _|  _|    _|      _|      _|_|_|_|  _|    _| \s
                     """);
+            client.start();
         };
     }
 }
