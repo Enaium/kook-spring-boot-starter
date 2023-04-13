@@ -65,7 +65,7 @@ public class SampleApplication {
 
         LOGGER.info("对方说了{}", content);
         if (type.equals("PERSON")) {
-            messageService.postMessageCreate(
+            directMessageService.postDirectMessageCreate(
                     Map.of(
                             "type", 9,
                             "target_id", data.get("author_id"),
