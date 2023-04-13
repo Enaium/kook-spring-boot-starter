@@ -19,10 +19,13 @@ package cn.enaium.kookstarter.client.http;
 import cn.enaium.kookstarter.client.resolver.GetResolver;
 import cn.enaium.kookstarter.client.resolver.PostResolver;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+import reactor.core.publisher.Mono;
+import reactor.netty.http.server.HttpServer;
 
 import java.util.Map;
 import java.util.Objects;
@@ -32,10 +35,26 @@ import java.util.Objects;
  */
 class ServiceTest {
 
-    HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(WebClient.builder().baseUrl("http://localhost:8080").build()))
+    HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(WebClient.builder().baseUrl("http://localhost:8888").build()))
             .customArgumentResolver(new GetResolver())
             .customArgumentResolver(new PostResolver())
             .build();
+
+
+    @BeforeAll
+    public static void server() {
+        HttpServer.create().host("localhost").port(8888).route(routes -> {
+            routes
+                    .get("/**", ((httpServerRequest, httpServerResponse) -> httpServerResponse.sendString(Mono.just(httpServerRequest.uri()).map(uri -> {
+                        if (uri.contains("?")) {
+                            return uri.split("\\?")[1];
+                        } else {
+                            return "";
+                        }
+                    }))))
+                    .post("/**", (httpServerRequest, httpServerResponse) -> httpServerResponse.sendString(httpServerRequest.receive().asString()));
+        }).bind().block();
+    }
 
     @Test
     public void getNoParam() {
