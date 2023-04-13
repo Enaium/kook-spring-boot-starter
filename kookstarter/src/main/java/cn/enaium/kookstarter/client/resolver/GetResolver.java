@@ -16,12 +16,16 @@
 
 package cn.enaium.kookstarter.client.resolver;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.invoker.HttpRequestValues;
 import org.springframework.web.service.invoker.HttpServiceArgumentResolver;
 
 import java.util.Map;
+
+import static cn.enaium.kookstarter.KookStarter.LOGGER;
 
 /**
  * @author Enaium
@@ -39,17 +43,32 @@ public class GetResolver implements HttpServiceArgumentResolver {
             return false;
         }
 
-        if (((Object[]) argument).length == 0) {
-            argument = Map.of();
+        if (((Object[]) argument).length == 0) {//长度为0说明无参数
+            argument = Map.of();//无参数时用空map代替
         } else {
-            argument = ((Object[]) argument)[0];
+            argument = ((Object[]) argument)[0];//有参数时只取第一个参数值
         }
 
 
-        for (Map.Entry<String, ?> entry : ((Map<String, ?>) argument).entrySet()) {
-            requestValues.addRequestParameter(entry.getKey(), entry.getValue().toString());
+        if (Map.class.isAssignableFrom(argument.getClass())) {//如果是map,就将每个键值对添加到参数中
+            for (Map.Entry<String, ?> entry : ((Map<String, ?>) argument).entrySet()) {
+                requestValues.addRequestParameter(entry.getKey(), entry.getValue().toString());
+            }
+        } else {//如果是其他对象,就将对象的所有字段添加到参数中
+            try {
+                final var objectMapper = new ObjectMapper();
+                final var string = objectMapper.writeValueAsString(argument);
+                final var fields = objectMapper.readTree(string).fields();
+                while (fields.hasNext()) {
+                    final var next = fields.next();
+                    requestValues.addRequestParameter(next.getKey(), next.getValue().textValue());
+                }
+            } catch (JsonProcessingException e) {
+                LOGGER.error("参数处理错误");
+                e.printStackTrace();
+                return false;
+            }
         }
-
         return true;
     }
 }

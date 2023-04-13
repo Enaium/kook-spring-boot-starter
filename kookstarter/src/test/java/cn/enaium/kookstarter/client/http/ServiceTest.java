@@ -18,25 +18,64 @@ package cn.enaium.kookstarter.client.http;
 
 import cn.enaium.kookstarter.client.resolver.GetResolver;
 import cn.enaium.kookstarter.client.resolver.PostResolver;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Enaium
  */
 class ServiceTest {
-    @Test
-    public void test() {
-        final var client = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(WebClient.builder().baseUrl("http://localhost:8080").build()))
-                .customArgumentResolver(new GetResolver())
-                .customArgumentResolver(new PostResolver())
-                .build();
 
-        System.out.println(client.createClient(GatewayService.class).getGatewayIndex().block());
-        System.out.println(client.createClient(MessageService.class).postMessageCreate(Map.of("name", "enaium")).block());
+    HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(WebClient.builder().baseUrl("http://localhost:8080").build()))
+            .customArgumentResolver(new GetResolver())
+            .customArgumentResolver(new PostResolver())
+            .build();
+
+    @Test
+    public void getNoParam() {
+        Assertions.assertNull(factory.createClient(GatewayService.class).getGatewayIndex().block());
+    }
+
+    @Test
+    public void getMapParam() {
+        final var block = factory.createClient(GatewayService.class).getGatewayIndex(Map.of("key1", "value1", "key2", "value2")).block();
+        Assertions.assertTrue(Objects.equals(block, "key1=value1&key2=value2") || Objects.equals(block, "key2=value2&key1=value1"));
+    }
+
+    @Test
+    public void getOParam() {
+        Assertions.assertEquals(
+                factory.createClient(GatewayService.class).getGatewayIndex(new O("value1", "value2")).block(),
+                "key1=value1&key2=value2"
+        );
+    }
+
+    @Test
+    public void postNoBody() {
+        Assertions.assertNull(
+                factory.createClient(MessageService.class).postMessageCreate().block()
+        );
+    }
+
+    @Test
+    public void postMapBody() {
+        final var block = factory.createClient(MessageService.class).postMessageCreate(Map.of("key1", "value1", "key2", "value2")).block();
+        Assertions.assertTrue(Objects.equals(block, "{\"key1\":\"value1\",\"key2\":\"value2\"}") || Objects.equals(block, "{\"key2\":\"value2\",\"key1\":\"value1\"}"));
+    }
+
+    @Test
+    public void postOBody() {
+        final var block = factory.createClient(MessageService.class).postMessageCreate(new O("value1", "value2")).block();
+        Assertions.assertTrue(Objects.equals(block, "{\"key1\":\"value1\",\"key2\":\"value2\"}") || Objects.equals(block, "{\"key2\":\"value2\",\"key1\":\"value1\"}"));
+    }
+
+    private record O(String key1, String key2) {
+
     }
 }
