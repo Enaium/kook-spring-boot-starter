@@ -6,7 +6,7 @@
 ![JitPack](https://img.shields.io/jitpack/version/com.github.Enaium/kook-spring-boot-starter?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/enaium/kook-spring-boot-starter?style=flat-square)
 
-支持了所有的HttpAPI和Websocket事件,可以在`kookstarter-sample`里查看例子
+支持了所有的Http接口和Websocket事件,可以在`kookstarter-sample`里查看例子
 
 最新版本以maven仓库中版本为准
 
