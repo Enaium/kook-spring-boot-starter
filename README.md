@@ -1,8 +1,10 @@
 # kook-spring-boot-stater
 
-![OpenJDK](https://img.shields.io/badge/OpenJDK-17-white?style=for-the-badge&logo=OpenJDK)
-![SpringBoot](https://img.shields.io/badge/SpringBoot-3-green?style=for-the-badge&logo=SpringBoot)
-![Maven-Central](https://img.shields.io/maven-central/v/cn.enaium/kook-spring-boot-starter?style=for-the-badge)
+![OpenJDK](https://img.shields.io/badge/OpenJDK-17-white?style=flat-square&logo=OpenJDK)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-3-green?style=flat-square&logo=SpringBoot)
+![Maven-Central](https://img.shields.io/maven-central/v/cn.enaium/kook-spring-boot-starter?style=flat-square)
+![JitPack](https://img.shields.io/jitpack/version/com.github.Enaium/kook-spring-boot-starter?style=flat-square)
+![GitHub](https://img.shields.io/github/license/enaium/kook-spring-boot-starter?style=flat-square)
 
 支持了所有的HttpAPI和Websocket事件,可以在`kookstarter-sample`里查看例子
 
