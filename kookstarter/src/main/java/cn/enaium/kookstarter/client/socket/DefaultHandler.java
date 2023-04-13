@@ -24,10 +24,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.annotation.NonNull;
@@ -35,8 +35,9 @@ import reactor.util.annotation.NonNull;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
@@ -46,23 +47,26 @@ import static cn.enaium.kookstarter.KookStarter.LOGGER;
  * @author Enaium
  * @since 0.3.0
  */
-@Component
 public class DefaultHandler implements WebSocketHandler {
 
     private final KookConfiguration configuration;
     private final ApplicationEventPublisher publisher;
+    private final DefaultClient defaultClient;
 
     public AtomicInteger sn = new AtomicInteger();
 
-    public DefaultHandler(KookConfiguration configuration, ApplicationEventPublisher publisher) {
+    public DefaultHandler(KookConfiguration configuration, ApplicationEventPublisher publisher, DefaultClient defaultClient) {
         this.configuration = configuration;
         this.publisher = publisher;
+        this.defaultClient = defaultClient;
     }
 
     @NonNull
     @Override
-    public Mono<Void> handle(WebSocketSession session) {
-        return session.receive().map(WebSocketMessage::getPayloadAsText).publishOn(Schedulers.boundedElastic()).doOnNext(message -> {
+    public Mono<Void> handle(@NonNull WebSocketSession session) {
+        Flux<WebSocketMessage> ping = Flux.interval(Duration.ofSeconds(30)).map(i -> session.textMessage("{\"s\":2,\"sn\":" + sn.get() + "}"));
+
+        final var input = session.receive().map(WebSocketMessage::getPayloadAsText).publishOn(Schedulers.boundedElastic()).doOnNext(message -> {
             if (configuration.isShowSign()) {
                 LOGGER.info(message);
             }
@@ -78,17 +82,19 @@ public class DefaultHandler implements WebSocketHandler {
                 sn.set(jsonNode.get("sn").intValue());
             }
 
-
             switch (jsonNode.get("s").intValue()) {
                 case 1 -> {//握手成功
-                    session.send(ping(session)).subscribe();
                     LOGGER.info("连接建立成功");
                 }
                 case 3 -> {//收到pong
-                    session.send(ping(session)).subscribe();
+
                 }
                 case 5 -> {//要求客户端断开当前连接重新连接
+                    LOGGER.info("服务器要求客户端断开当前连接重新连接");
                     sn.set(0);
+                    session.close().doOnSuccess(unused -> {
+                        defaultClient.connect();
+                    }).subscribe();
                 }
                 case 0 -> {//事件
                     final var data = jsonNode.get("d");
@@ -116,11 +122,7 @@ public class DefaultHandler implements WebSocketHandler {
                 }
             }
         }).then();
-    }
-
-    //创建ping
-    private Mono<WebSocketMessage> ping(WebSocketSession session) {
-        return Mono.just(session.pingMessage(factory -> factory.wrap(("{\"s\":2,\"sn\":" + sn.get() + "}").getBytes(StandardCharsets.UTF_8))));
+        return session.send(ping).and(input);
     }
 
 

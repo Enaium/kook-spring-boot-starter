@@ -16,7 +16,7 @@
 
 package cn.enaium.kookstarter;
 
-import cn.enaium.kookstarter.client.socket.Client;
+import cn.enaium.kookstarter.client.socket.DefaultClient;
 import cn.enaium.kookstarter.configuration.KookConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,10 +36,10 @@ public class KookStarter {
     public static final Logger LOGGER = LogManager.getLogger(KookStarter.class);
 
 
-    private final Client client;
+    private final DefaultClient defaultClient;
 
-    public KookStarter(Client client) {
-        this.client = client;
+    public KookStarter(DefaultClient defaultClient) {
+        this.defaultClient = defaultClient;
     }
 
 
@@ -54,7 +54,7 @@ public class KookStarter {
                     _|  _|    _|    _|  _|    _|  _|  _|          _|      _|      _|    _|  _|    _|      _|      _|        _|    _| \s
                     _|    _|    _|_|      _|_|    _|    _|  _|_|_|        _|      _|    _|  _|    _|      _|      _|_|_|_|  _|    _| \s
                     """);
-            client.start();
+            defaultClient.connect();
         };
     }
 }
