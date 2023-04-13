@@ -55,7 +55,7 @@ public class Client {
                 .doOnSuccess(gateway -> {
                     JsonNode result;
                     try {
-                        result = new ObjectMapper().readValue(gateway.toString(), ObjectNode.class);
+                        result = new ObjectMapper().readValue(gateway, ObjectNode.class);
                     } catch (JsonProcessingException e) {
                         throw new RuntimeException(e);
                     }
