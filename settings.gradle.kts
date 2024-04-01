@@ -1,3 +1,2 @@
-rootProject.name = "kookstarter"
-include("kookstarter")
-include("kookstarter-sample")
+rootProject.name = "kook-spring-boot-starter"
+
