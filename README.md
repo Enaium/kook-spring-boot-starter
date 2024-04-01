@@ -5,7 +5,7 @@
 ![Maven-Central](https://img.shields.io/maven-central/v/cn.enaium/kook-spring-boot-starter?style=flat-square)
 ![JitPack](https://img.shields.io/jitpack/version/com.github.Enaium/kook-spring-boot-starter?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/enaium/kook-spring-boot-starter?style=flat-square)
-![Enaium的频道](https://www.kookapp.cn/api/v3/badge/guild?style=0&guild_id=7057670786047912)
+[![Enaium的频道](https://www.kookapp.cn/api/v3/badge/guild?style=0&guild_id=7057670786047912)](https://kook.top/YaP12f)
 
 支持了所有的Http接口和Websocket事件,可以在`test`里查看例子
 
