@@ -271,7 +271,13 @@ public record MessageEvent() {
                 }
 
                 public record Kmarkdown(@JsonProperty("mention") List<String> mention,
+                                        @JsonProperty("mention_part") List<MentionPart> mentionPart,
                                         @JsonProperty("item_part") List<Object> itemPart) {
+                    public record MentionPart(@JsonProperty("id") String id,
+                                              @JsonProperty("username") String username,
+                                              @JsonProperty("full_name") String fullName,
+                                              @JsonProperty("avatar") String avatar) {
+                    }
                 }
             }
         }
