@@ -2,10 +2,6 @@ package cn.enaium.kookstarter.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.lang.Boolean;
-import java.lang.Integer;
-import java.lang.String;
-
 /**
  * @author Enaium
  * @since 0.4.0

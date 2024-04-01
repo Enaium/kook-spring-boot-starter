@@ -19,9 +19,13 @@ public record ChannelViewResponse(@JsonProperty("code") Integer code,
                        @JsonProperty("limit_amount") Integer limitAmount,
                        @JsonProperty("is_category") Boolean isCategory,
                        @JsonProperty("permission_sync") Integer permissionSync,
+                       @JsonProperty("permission_overwrites") List<PermissionOverwrites> permissionOverwrites,
                        @JsonProperty("permission_users") List<Object> permissionUsers,
                        @JsonProperty("voice_quality") String voiceQuality,
                        @JsonProperty("server_url") String serverUrl,
                        @JsonProperty("children") List<String> children) {
+        public record PermissionOverwrites(@JsonProperty("role_id") Integer roleId,
+                                           @JsonProperty("allow") Integer allow, @JsonProperty("deny") Integer deny) {
+        }
     }
 }
