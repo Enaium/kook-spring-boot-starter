@@ -23,6 +23,7 @@ public record ChannelEvent() {
             public record Extra(@JsonProperty("type") String type,
                                 @JsonProperty("body") Body body) {
                 public record Body(@JsonProperty("channel_id") String channelId,
+                                   @JsonProperty("channel_type") Integer channelType,
                                    @JsonProperty("emoji") Emoji emoji, @JsonProperty("user_id") String userId,
                                    @JsonProperty("msg_id") String msgId) {
                     public record Emoji(@JsonProperty("id") String id,
@@ -57,7 +58,8 @@ public record ChannelEvent() {
                                    @JsonProperty("mention_here") Boolean mentionHere,
                                    @JsonProperty("mention_roles") List<Object> mentionRoles,
                                    @JsonProperty("updated_at") Long updatedAt,
-                                   @JsonProperty("msg_id") String msgId) {
+                                   @JsonProperty("msg_id") String msgId,
+                                   @JsonProperty("channel_type") Integer channelType) {
                 }
             }
         }
@@ -81,7 +83,8 @@ public record ChannelEvent() {
             public record Extra(@JsonProperty("type") String type,
                                 @JsonProperty("body") Body body) {
                 public record Body(@JsonProperty("channel_id") String channelId,
-                                   @JsonProperty("msg_id") String msgId) {
+                                   @JsonProperty("msg_id") String msgId,
+                                   @JsonProperty("channel_type") Integer channelType) {
                 }
             }
         }
@@ -160,7 +163,8 @@ public record ChannelEvent() {
             public record Extra(@JsonProperty("type") String type,
                                 @JsonProperty("body") Body body) {
                 public record Body(@JsonProperty("id") String id,
-                                   @JsonProperty("deleted_at") Long deletedAt) {
+                                   @JsonProperty("deleted_at") Long deletedAt,
+                                   @JsonProperty("type") Integer type) {
                 }
             }
         }
@@ -185,7 +189,8 @@ public record ChannelEvent() {
                                 @JsonProperty("body") Body body) {
                 public record Body(@JsonProperty("channel_id") String channelId,
                                    @JsonProperty("operator_id") String operatorId,
-                                   @JsonProperty("msg_id") String msgId) {
+                                   @JsonProperty("msg_id") String msgId,
+                                   @JsonProperty("channel_type") Integer channelType) {
                 }
             }
         }
@@ -210,7 +215,8 @@ public record ChannelEvent() {
                                 @JsonProperty("body") Body body) {
                 public record Body(@JsonProperty("channel_id") String channelId,
                                    @JsonProperty("operator_id") String operatorId,
-                                   @JsonProperty("msg_id") String msgId) {
+                                   @JsonProperty("msg_id") String msgId,
+                                   @JsonProperty("channel_type") Integer channelType) {
                 }
             }
         }

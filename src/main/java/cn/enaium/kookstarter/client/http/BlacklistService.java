@@ -24,7 +24,7 @@ public interface BlacklistService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/blacklist/list")
-    BlacklistListResponse blacklistList(@NotNull @RequestParam String guildId);
+    BlacklistListResponse blacklistList(@NotNull @RequestParam("guild_id") String guildId);
 
     /**
      * 加入黑名单

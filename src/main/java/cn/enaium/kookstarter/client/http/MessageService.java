@@ -26,7 +26,7 @@ public interface MessageService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/message/list")
-    MessageListResponse messageList(@NotNull @RequestParam String targetId,
+    MessageListResponse messageList(@NotNull @RequestParam("target_id") String targetId,
                                     @Nullable @RequestParam(value = "msg_id", required = false) String msgId,
                                     @Nullable @RequestParam(value = "pin", required = false) Object pin,
                                     @Nullable @RequestParam(value = "flag", required = false) String flag,
@@ -39,7 +39,7 @@ public interface MessageService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/message/view")
-    MessageViewResponse messageView(@NotNull @RequestParam String msgId);
+    MessageViewResponse messageView(@NotNull @RequestParam("msg_id") String msgId);
 
     /**
      * 发送频道聊天消息
@@ -76,8 +76,8 @@ public interface MessageService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/message/reaction-list")
-    MessageReactionListResponse messageReactionList(@NotNull @RequestParam String msgId,
-                                                    @NotNull @RequestParam String emoji);
+    MessageReactionListResponse messageReactionList(@NotNull @RequestParam("msg_id") String msgId,
+                                                    @NotNull @RequestParam("emoji") String emoji);
 
     /**
      * 给某个消息添加回应

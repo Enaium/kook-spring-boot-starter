@@ -22,7 +22,7 @@ public interface IntimacyService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/intimacy/index")
-    IntimacyIndexResponse intimacyIndex(@NotNull @RequestParam String userId);
+    IntimacyIndexResponse intimacyIndex(@NotNull @RequestParam("user_id") String userId);
 
     /**
      * 更新用户亲密度

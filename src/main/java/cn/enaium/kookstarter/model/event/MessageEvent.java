@@ -26,7 +26,8 @@ public record MessageEvent() {
                                 @JsonProperty("mention_all") Boolean mentionAll,
                                 @JsonProperty("mention_roles") List<Object> mentionRoles,
                                 @JsonProperty("mention_here") Boolean mentionHere,
-                                @JsonProperty("code") String code, @JsonProperty("author") Author author) {
+                                @JsonProperty("code") String code, @JsonProperty("author") Author author,
+                                @JsonProperty("channel_type") Integer channelType) {
                 public record Author(@JsonProperty("identify_num") String identifyNum,
                                      @JsonProperty("avatar") String avatar,
                                      @JsonProperty("username") String username, @JsonProperty("id") String id,
@@ -54,7 +55,8 @@ public record MessageEvent() {
             public record Extra(@JsonProperty("type") Integer type,
                                 @JsonProperty("code") String code, @JsonProperty("guild_id") String guildId,
                                 @JsonProperty("attachments") Attachments attachments,
-                                @JsonProperty("author") Author author) {
+                                @JsonProperty("author") Author author,
+                                @JsonProperty("channel_type") Integer channelType) {
                 public record Attachments(@JsonProperty("type") String type,
                                           @JsonProperty("name") String name, @JsonProperty("url") String url) {
                 }
@@ -123,7 +125,8 @@ public record MessageEvent() {
             public record Extra(@JsonProperty("type") Integer type,
                                 @JsonProperty("guild_id") String guildId, @JsonProperty("code") String code,
                                 @JsonProperty("attachments") Attachments attachments,
-                                @JsonProperty("author") Author author) {
+                                @JsonProperty("author") Author author,
+                                @JsonProperty("channel_type") Integer channelType) {
                 public record Attachments(@JsonProperty("type") String type,
                                           @JsonProperty("url") String url, @JsonProperty("name") String name,
                                           @JsonProperty("file_type") String fileType,
@@ -164,7 +167,8 @@ public record MessageEvent() {
                                 @JsonProperty("mention_here") Boolean mentionHere,
                                 @JsonProperty("nav_channels") List<Object> navChannels,
                                 @JsonProperty("code") String code, @JsonProperty("author") Author author,
-                                @JsonProperty("kmarkdown") Kmarkdown kmarkdown) {
+                                @JsonProperty("kmarkdown") Kmarkdown kmarkdown,
+                                @JsonProperty("channel_type") Integer channelType) {
                 public record Author(@JsonProperty("id") String id,
                                      @JsonProperty("username") String username,
                                      @JsonProperty("identify_num") String identifyNum,
@@ -210,7 +214,8 @@ public record MessageEvent() {
                                 @JsonProperty("mention_roles") List<Object> mentionRoles,
                                 @JsonProperty("mention_here") Boolean mentionHere,
                                 @JsonProperty("nav_channels") List<Object> navChannels,
-                                @JsonProperty("code") String code, @JsonProperty("author") Author author) {
+                                @JsonProperty("code") String code, @JsonProperty("author") Author author,
+                                @JsonProperty("channel_type") Integer channelType) {
                 public record Author(@JsonProperty("id") String id,
                                      @JsonProperty("username") String username,
                                      @JsonProperty("identify_num") String identifyNum,
@@ -255,7 +260,8 @@ public record MessageEvent() {
             public record Extra(@JsonProperty("type") Integer type,
                                 @JsonProperty("mention") List<String> mention,
                                 @JsonProperty("author") Author author,
-                                @JsonProperty("kmarkdown") Kmarkdown kmarkdown) {
+                                @JsonProperty("kmarkdown") Kmarkdown kmarkdown,
+                                @JsonProperty("channel_type") Integer channelType) {
                 public record Author(@JsonProperty("id") String id,
                                      @JsonProperty("username") String username,
                                      @JsonProperty("identify_num") String identifyNum,

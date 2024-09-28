@@ -36,7 +36,7 @@ public interface GuildService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/guild/view")
-    GuildViewResponse guildView(@NotNull @RequestParam String guildId);
+    GuildViewResponse guildView(@NotNull @RequestParam("guild_id") String guildId);
 
     /**
      * 获取服务器中的用户列表
@@ -54,7 +54,7 @@ public interface GuildService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/guild/user-list")
-    GuildUserListResponse guildUserList(@NotNull @RequestParam String guildId,
+    GuildUserListResponse guildUserList(@NotNull @RequestParam("guild_id") String guildId,
                                         @Nullable @RequestParam(value = "channel_id", required = false) String channelId,
                                         @Nullable @RequestParam(value = "search", required = false) String search,
                                         @Nullable @RequestParam(value = "role_id", required = false) Integer roleId,
@@ -100,7 +100,7 @@ public interface GuildService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/guild-mute/list")
-    GuildMuteListResponse guildMuteList(@NotNull @RequestParam String guildId,
+    GuildMuteListResponse guildMuteList(@NotNull @RequestParam("guild_id") String guildId,
                                         @Nullable @RequestParam(value = "return_type", required = false) String returnType);
 
     /**
@@ -130,7 +130,7 @@ public interface GuildService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/guild-boost/history")
-    GuildBoostHistoryResponse guildBoostHistory(@NotNull @RequestParam String guildId,
+    GuildBoostHistoryResponse guildBoostHistory(@NotNull @RequestParam("guild_id") String guildId,
                                                 @Nullable @RequestParam(value = "start_time", required = false) Integer startTime,
                                                 @Nullable @RequestParam(value = "end_time", required = false) Integer endTime);
 }

@@ -28,7 +28,7 @@ public interface ChannelService {
     ChannelListResponse channelList(
             @Nullable @RequestParam(value = "page", required = false) Integer page,
             @Nullable @RequestParam(value = "page_size", required = false) Integer pageSize,
-            @NotNull @RequestParam String guildId,
+            @NotNull @RequestParam("guild_id") String guildId,
             @Nullable @RequestParam(value = "type", required = false) Integer type);
 
     /**
@@ -39,7 +39,7 @@ public interface ChannelService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/channel/view")
-    ChannelViewResponse channelView(@NotNull @RequestParam String targetId,
+    ChannelViewResponse channelView(@NotNull @RequestParam("target_id") String targetId,
                                     @Nullable @RequestParam(value = "need_children", required = false) Boolean needChildren);
 
     /**
@@ -76,7 +76,7 @@ public interface ChannelService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/channel/user-list")
-    ChannelUserListResponse channelUserList(@NotNull @RequestParam String channelId);
+    ChannelUserListResponse channelUserList(@NotNull @RequestParam("channel_id") String channelId);
 
     /**
      * 语音频道之间移动用户
@@ -94,7 +94,8 @@ public interface ChannelService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/channel-role/index")
-    ChannelRoleIndexResponse channelRoleIndex(@NotNull @RequestParam String channelId);
+    ChannelRoleIndexResponse channelRoleIndex(
+            @NotNull @RequestParam("channel_id") String channelId);
 
     /**
      * 创建频道角色权限

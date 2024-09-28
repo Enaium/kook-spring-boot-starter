@@ -43,8 +43,8 @@ public interface DirectMessageService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/direct-message/view")
-    DirectMessageViewResponse directMessageView(@NotNull @RequestParam String chatCode,
-                                                @NotNull @RequestParam String msgId);
+    DirectMessageViewResponse directMessageView(@NotNull @RequestParam("chat_code") String chatCode,
+                                                @NotNull @RequestParam("msg_id") String msgId);
 
     /**
      * 发送私信聊天消息
@@ -84,8 +84,9 @@ public interface DirectMessageService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/direct-message/reaction-list")
-    DirectMessageReactionListResponse directMessageReactionList(@NotNull @RequestParam String msgId,
-                                                                @Nullable @RequestParam(value = "emoji", required = false) String emoji);
+    DirectMessageReactionListResponse directMessageReactionList(
+            @NotNull @RequestParam("msg_id") String msgId,
+            @Nullable @RequestParam(value = "emoji", required = false) String emoji);
 
     /**
      * 给某个消息添加回应

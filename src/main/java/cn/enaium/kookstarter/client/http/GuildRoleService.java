@@ -24,7 +24,7 @@ public interface GuildRoleService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/guild-role/list")
-    GuildRoleListResponse guildRoleList(@NotNull @RequestParam String guildId,
+    GuildRoleListResponse guildRoleList(@NotNull @RequestParam("guild_id") String guildId,
                                         @Nullable @RequestParam(value = "page", required = false) Integer page,
                                         @Nullable @RequestParam(value = "page_size", required = false) Integer pageSize);
 
