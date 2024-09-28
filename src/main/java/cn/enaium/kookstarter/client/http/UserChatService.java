@@ -38,7 +38,7 @@ public interface UserChatService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/user-chat/view")
-    UserChatViewResponse userChatView(@NotNull @RequestParam String chatCode);
+    UserChatViewResponse userChatView(@NotNull @RequestParam("chat_code") String chatCode);
 
     /**
      * 创建私信聊天会话

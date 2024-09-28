@@ -32,7 +32,7 @@ public interface GuildEmojiService {
     GuildEmojiListResponse guildEmojiList(
             @Nullable @RequestParam(value = "page", required = false) Integer page,
             @Nullable @RequestParam(value = "page_size", required = false) Integer pageSize,
-            @NotNull @RequestParam String guildId);
+            @NotNull @RequestParam("guild_id") String guildId);
 
     /**
      * 创建服务器表情

@@ -95,7 +95,8 @@ public record UserEvent() {
                         @JsonProperty("verify_token") String verifyToken) {
             public record Extra(@JsonProperty("type") String type,
                                 @JsonProperty("body") Body body) {
-                public record Body(@JsonProperty("guild_id") String guildId) {
+                public record Body(@JsonProperty("guild_id") String guildId,
+                                   @JsonProperty("state") String state) {
                 }
             }
         }

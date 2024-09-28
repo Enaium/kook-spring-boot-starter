@@ -2,6 +2,8 @@ package cn.enaium.kookstarter.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * @author Enaium
  * @since 0.4.0
@@ -12,11 +14,19 @@ public record UserMeResponse(@JsonProperty("code") Integer code,
                        @JsonProperty("identify_num") String identifyNum,
                        @JsonProperty("online") Boolean online, @JsonProperty("os") String os,
                        @JsonProperty("status") Integer status, @JsonProperty("avatar") String avatar,
-                       @JsonProperty("banner") String banner, @JsonProperty("bot") Boolean bot,
+                       @JsonProperty("vip_avatar") String vipAvatar, @JsonProperty("banner") String banner,
+                       @JsonProperty("nickname") String nickname, @JsonProperty("roles") List<Object> roles,
+                       @JsonProperty("is_vip") Boolean isVip, @JsonProperty("vip_amp") Boolean vipAmp,
+                       @JsonProperty("bot") Boolean bot, @JsonProperty("bot_status") Integer botStatus,
+                       @JsonProperty("tag_info") TagInfo tagInfo,
                        @JsonProperty("mobile_verified") Boolean mobileVerified,
-                       @JsonProperty("client_id") String clientId,
+                       @JsonProperty("is_sys") Boolean isSys, @JsonProperty("client_id") String clientId,
+                       @JsonProperty("verified") Boolean verified,
                        @JsonProperty("mobile_prefix") String mobilePrefix,
                        @JsonProperty("mobile") String mobile,
                        @JsonProperty("invited_count") Integer invitedCount) {
+        public record TagInfo(@JsonProperty("color") String color,
+                              @JsonProperty("bg_color") String bgColor, @JsonProperty("text") String text) {
+        }
     }
 }

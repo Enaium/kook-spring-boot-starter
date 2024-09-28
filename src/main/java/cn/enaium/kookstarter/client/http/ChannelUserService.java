@@ -25,5 +25,6 @@ public interface ChannelUserService {
     ChannelUserGetJoinedChannelResponse channelUserGetJoinedChannel(
             @Nullable @RequestParam(value = "page", required = false) Integer page,
             @Nullable @RequestParam(value = "page_size", required = false) Integer pageSize,
-            @NotNull @RequestParam String guildId, @NotNull @RequestParam String userId);
+            @NotNull @RequestParam("guild_id") String guildId,
+            @NotNull @RequestParam("user_id") String userId);
 }

@@ -20,6 +20,6 @@ public interface BadgeService {
      * @since 0.4.0
      */
     @GetExchange("/api/v3/badge/guild")
-    BadgeGuildResponse badgeGuild(@NotNull @RequestParam String guildId,
+    BadgeGuildResponse badgeGuild(@NotNull @RequestParam("guild_id") String guildId,
                                   @Nullable @RequestParam(value = "style", required = false) Integer style);
 }
