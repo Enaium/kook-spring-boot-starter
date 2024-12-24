@@ -42,9 +42,16 @@ public class KookStarter {
 
     @Bean
     public CommandLineRunner run() {
-
-        LOGGER.info("KookStarter is starting...");
-
-        return args -> defaultClient.connect();
+        return args -> {
+            Thread thread = new Thread(() -> {
+                try {
+                    LOGGER.info("KookStarter启动中...");
+                    defaultClient.connect().block();
+                } catch (Exception e) {
+                    LOGGER.error("KookStarter启动失败: {}", e.getMessage());
+                }
+            });
+            thread.start();
+        };
     }
 }

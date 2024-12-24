@@ -1,7 +1,7 @@
 # kook-spring-boot-stater
 
 ![OpenJDK](https://img.shields.io/badge/OpenJDK-21-white?style=flat-square&logo=OpenJDK)
-![SpringBoot](https://img.shields.io/badge/SpringBoot-3.2-green?style=flat-square&logo=SpringBoot)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-3.4-green?style=flat-square&logo=SpringBoot)
 ![Maven-Central](https://img.shields.io/maven-central/v/cn.enaium/kook-spring-boot-starter?style=flat-square)
 ![JitPack](https://img.shields.io/jitpack/version/com.github.Enaium/kook-spring-boot-starter?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/enaium/kook-spring-boot-starter?style=flat-square)

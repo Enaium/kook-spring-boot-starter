@@ -15,7 +15,7 @@ java {
 }
 
 group = "cn.enaium"
-version = "0.4.2"
+version = property("version").toString()
 
 repositories {
     mavenCentral()
