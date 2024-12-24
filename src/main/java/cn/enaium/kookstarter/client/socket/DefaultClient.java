@@ -17,10 +17,13 @@
 package cn.enaium.kookstarter.client.socket;
 
 import cn.enaium.kookstarter.client.http.GatewayService;
-import cn.enaium.kookstarter.model.response.GatewayIndexResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.client.ReactorNettyWebSocketClient;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.net.URI;
 
@@ -29,6 +32,9 @@ import java.net.URI;
  */
 @Component
 public class DefaultClient {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultClient.class);
+
     private final GatewayService gatewayService;
     private final DefaultHandler defaultHandler;
 
@@ -37,10 +43,17 @@ public class DefaultClient {
         this.defaultHandler = defaultHandler;
     }
 
-    public void connect() {
-        final GatewayIndexResponse gatewayIndexResponse = gatewayService.gatewayIndex(0);
-        if (gatewayIndexResponse.code() == 0) {
-            new ReactorNettyWebSocketClient().execute(URI.create(gatewayIndexResponse.data().url()), defaultHandler).subscribe();
-        }
+    public Mono<Void> connect() {
+        return Mono.fromCallable(() -> gatewayService.gatewayIndex(0))
+                .subscribeOn(Schedulers.boundedElastic())
+                .flatMap(gatewayIndexResponse -> {
+                    if (gatewayIndexResponse.code() == 0) {
+                        LOGGER.info("获取网关地址成功: {}", gatewayIndexResponse.data().url());
+                        return new ReactorNettyWebSocketClient().execute(URI.create(gatewayIndexResponse.data().url()), defaultHandler);
+                    } else {
+                        LOGGER.error("获取网关地址失败: {}", gatewayIndexResponse.message());
+                        return connect();
+                    }
+                });
     }
 }

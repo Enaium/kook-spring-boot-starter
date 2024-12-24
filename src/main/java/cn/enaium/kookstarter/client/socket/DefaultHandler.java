@@ -55,6 +55,8 @@ public class DefaultHandler implements WebSocketHandler {
 
     public AtomicInteger sn = new AtomicInteger();
 
+    private long lastPong = System.currentTimeMillis();
+
     public DefaultHandler(ObjectMapper objectMapper, ApplicationEventPublisher publisher, DefaultClient defaultClient, ApplicationContext applicationContext) {
         this.objectMapper = objectMapper;
         this.publisher = publisher;
@@ -84,13 +86,20 @@ public class DefaultHandler implements WebSocketHandler {
             switch (jsonNode.get("s").intValue()) {
                 case 1 -> //握手成功
                         LOGGER.info("连接建立成功");
-                case 3 -> {//收到pong
-
+                case 3 -> {//收到pong，延迟1分钟检查服务器是否响应
+                    lastPong = System.currentTimeMillis();
+                    Mono.delay(Duration.ofMinutes(1)).subscribe(delay -> {
+                        if (System.currentTimeMillis() - lastPong > 30000) {
+                            LOGGER.error("服务器未响应");
+                            defaultClient.connect().doOnSuccess(it -> LOGGER.info("服务器未响应，重新连接")).subscribe();
+                        }
+                    });
                 }
                 case 5 -> {//要求客户端断开当前连接重新连接
                     LOGGER.info("服务器要求客户端断开当前连接重新连接");
                     sn.set(0);
-                    session.close().doOnSuccess(unused -> defaultClient.connect()).subscribe();
+                    session.close().block();
+                    defaultClient.connect().subscribe();
                 }
                 case 0 -> {//事件
                     final var data = jsonNode.get("d");
