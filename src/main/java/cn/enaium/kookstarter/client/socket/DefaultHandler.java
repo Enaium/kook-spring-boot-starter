@@ -103,21 +103,24 @@ public class DefaultHandler implements WebSocketHandler {
                 }
                 case 0 -> {//事件
                     final var data = jsonNode.get("d");
-                    final var extra = data.get("extra");
-                    final var type = extra.get("type").asText();
-
-                    final List<Event> list = events.stream().filter(it -> it.type().equals(type)).toList();
-                    if (list.isEmpty()) {
-                        LOGGER.warn("未知事件:{}", type);
-                    } else {
-                        list.forEach(it -> {
-                            try {
-                                final Object event = objectMapper.readValue(message, it.klass());
-                                publisher.publishEvent(event);
-                            } catch (JsonProcessingException e) {
-                                LOGGER.error("事件处理失败", e);
-                            }
-                        });
+                    if (data.has("extra")) {
+                        final var extra = data.get("extra");
+                        final var type = extra.get("type").asText();
+                        final List<Event> list = events.stream().filter(it -> it.type().equals(type)).toList();
+                        if (list.isEmpty()) {
+                            LOGGER.warn("未知事件:{}", type);
+                        } else {
+                            list.forEach(it -> {
+                                try {
+                                    final Object event = objectMapper.readValue(message, it.klass());
+                                    publisher.publishEvent(event);
+                                } catch (JsonProcessingException e) {
+                                    LOGGER.error("事件处理失败", e);
+                                }
+                            });
+                        }
+                    }else {
+                        LOGGER.error("事件获取extra失败:{}", jsonNode);
                     }
                 }
             }
