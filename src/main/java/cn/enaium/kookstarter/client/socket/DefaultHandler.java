@@ -76,6 +76,8 @@ public class DefaultHandler implements WebSocketHandler {
             try {
                 jsonNode = new ObjectMapper().readValue(message, JsonNode.class);
             } catch (JsonProcessingException e) {
+                //添加日志
+                LOGGER.error("JSON解析失败：{}"+e);
                 throw new RuntimeException(e);
             }
 
@@ -103,22 +105,27 @@ public class DefaultHandler implements WebSocketHandler {
                 }
                 case 0 -> {//事件
                     final var data = jsonNode.get("d");
-                    final var extra = data.get("extra");
-                    final var type = extra.get("type").asText();
+                    if (data.has("extra")) {
+                        final var extra = data.get("extra");
+                        final var type = extra.get("type").asText();
 
-                    final List<Event> list = events.stream().filter(it -> it.type().equals(type)).toList();
-                    if (list.isEmpty()) {
-                        LOGGER.warn("未知事件:{}", type);
-                    } else {
-                        list.forEach(it -> {
-                            try {
-                                final Object event = objectMapper.readValue(message, it.klass());
-                                publisher.publishEvent(event);
-                            } catch (JsonProcessingException e) {
-                                LOGGER.error("事件处理失败", e);
-                            }
-                        });
+                        final List<Event> list = events.stream().filter(it -> it.type().equals(type)).toList();
+                        if (list.isEmpty()) {
+                            LOGGER.warn("未知事件:{}", type);
+                        } else {
+                            list.forEach(it -> {
+                                try {
+                                    final Object event = objectMapper.readValue(message, it.klass());
+                                    publisher.publishEvent(event);
+                                } catch (JsonProcessingException e) {
+                                    LOGGER.error("事件处理失败", e);
+                                }
+                            });
+                        }
+                    }else {
+                        LOGGER.error("data extra null exception:{}",jsonNode);
                     }
+
                 }
             }
         }).then();
